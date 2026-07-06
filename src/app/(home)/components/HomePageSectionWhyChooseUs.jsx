@@ -98,22 +98,25 @@ export default function HomePageSectionWhyChooseUs() {
             </div>
           </div>
 
-          {/* img */}
+          {/* Video Section - Replaced Image with Video */}
           <div className="space-y-3 md:space-y-2 xl:space-y-1">
             <figure 
-              className="h-[280px] sm:h-[380px] md:h-[480px] lg:h-[612px] w-full max-w-[1290px] overflow-hidden rounded-4xl ring-2 ring-white mx-auto"
+              className="h-[280px] sm:h-[380px] md:h-[480px] lg:h-[612px] w-full max-w-[1290px] overflow-hidden rounded-4xl ring-2 ring-white mx-auto relative"
               role="img"
               aria-label="MDR Futuristics crypto payment platform dashboard showing stablecoin transfers and multi-currency wallet interface"
             >
-              <Image
-                src="/images/ns-img-562.png"
-                alt="MDR Futuristics financial dashboard showing stablecoin transfers, multi-currency wallet, and crypto payment analytics"
-                width={1290}
-                height={612}
+              <video
                 className="w-full h-full rounded-[28px] object-cover"
-                itemProp="image"
-                loading="lazy"
-              />
+                autoPlay
+                loop
+                muted
+                playsInline
+                itemProp="video"
+                aria-label="MDR Futuristics platform demonstration video"
+              >
+                <source src="/images/bannerVideos.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
             </figure>
 
             <div 

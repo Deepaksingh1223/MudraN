@@ -74,12 +74,12 @@ export default function CryptoLogin() {
           <div className="bg-white border border-[#e4d8c0] rounded-[28px] p-5 md:p-10 shadow-[0_10px_44px_rgba(150,100,20,0.1)]">
             
             {/* Brand Logo */}
-            <div className="flex items-center gap-2.5 mb-[30px]">
+            <a href="/"  className="flex items-center gap-2.5 mb-[30px]">
               <div className="w-[38px] h-[38px] bg-[#fdf6e2] border border-[#d4a82a] rounded-[11px] flex items-center justify-center">
                 <img src="/images/favicon.png" alt="Mudra Logo" className="w-5 h-5 object-contain" />
               </div>
               <span className="text-[#a87820] text-[13px] font-bold tracking-[4px] font-['DM_Mono',monospace]">MUDRA</span>
-            </div>
+            </a>
 
             <h1 className="text-[#1c1a10] text-[30px] font-extrabold tracking-[-0.8px] mb-1.5 leading-[1.15]">Sign In</h1>
             <p className="text-[#9a8460] text-sm mb-[34px] leading-relaxed">Hello, Welcome back to your account!</p>

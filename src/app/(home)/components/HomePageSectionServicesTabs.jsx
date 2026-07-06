@@ -17,7 +17,7 @@ export default function HomePageSectionServicesTabs() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  const tabs = [
+  const tabs = [  
     { id: "transfers", label: "Transfers", title: "Fast & Secure Stablecoin Transfers", ariaLabel: "Stablecoin transfer service tab" },
     { id: "multicurrency", label: "Multi-Currency", title: "Multi-Currencies, One App", ariaLabel: "Multi-currency wallet tab" },
     { id: "spending", label: "Spending", title: "Spend Stablecoins Instantly", ariaLabel: "Everyday crypto spending tab" },
@@ -54,7 +54,7 @@ export default function HomePageSectionServicesTabs() {
     },
     earn: {
       description: "Earn daily rewards on your crypto holdings, swap assets easily with competitive rates, or use our P2P marketplace for low-cost stablecoin access. Complete ecosystem for maximizing the value of your digital assets. Start earning passive income today with our innovative reward system.",
-      image: "/images/ns-img-561.png",
+      image: "/images/ns-img-new.png",
       imageAlt: "Crypto earnings dashboard showing daily rewards, asset swapping, and P2P trading interface"
     }
   };
@@ -74,11 +74,11 @@ export default function HomePageSectionServicesTabs() {
   return (
     <section className="py-12 md:py-20 lg:py-24 xl:py-32 bg-white" id="about">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-         
+
         {/* Subheading */}
         <div className="text-center mb-8 md:mb-12">
           <h3 className="text-1xl sm:text-3xl md:text-4xl font-semibold text-gray-900">
-          MDR Futuristics — Where Crypto Meets Real Life
+            MDR Futuristics — Where Crypto Meets Real Life
           </h3>
           <p className="text-gray-600 mt-3 max-w-2xl mx-auto">
             Empowering global payments with stablecoins. Seamless, fast, and secure — built for everyday people and businesses.
@@ -87,9 +87,9 @@ export default function HomePageSectionServicesTabs() {
 
         <div className="space-y-8 lg:space-y-12">
           {/* Tab Navigation */}
-          <div 
+          <div
             className="relative w-full"
-            role="tablist" 
+            role="tablist"
             aria-label="MDR Futuristics financial services tabs"
           >
             <div className="bg-gray-50 md:bg-gray-100/50 rounded-2xl md:rounded-full p-1.5">
@@ -108,8 +108,8 @@ export default function HomePageSectionServicesTabs() {
                       relative cursor-pointer rounded-xl md:rounded-full px-3 sm:px-4 md:px-5 py-2.5 md:py-3
                       font-medium text-xs sm:text-sm md:text-base transition-all duration-300
                       flex-1 text-center whitespace-nowrap
-                      ${activeTab === tab.id 
-                        ? 'bg-gray-900 text-white shadow-lg md:bg-white md:text-gray-900 md:shadow-sm' 
+                      ${activeTab === tab.id
+                        ? 'bg-gray-900 text-white shadow-lg md:bg-white md:text-gray-900 md:shadow-sm'
                         : 'bg-transparent text-gray-500 hover:text-gray-700 hover:bg-gray-100 md:hover:bg-transparent'
                       }
                     `}
@@ -157,17 +157,17 @@ export default function HomePageSectionServicesTabs() {
                     </div>
 
                     <div>
-                      <a 
+                      <a
                         href="/Login"
                         className="inline-flex items-center gap-3 bg-gray-900 hover:bg-gray-800 text-white rounded-xl px-6 py-3.5 transition-all duration-300 group"
                       >
-                        <svg 
-                          xmlns="http://www.w3.org/2000/svg" 
-                          viewBox="0 0 24 24" 
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
                           className="w-5 h-5 transition-transform duration-300 group-hover:scale-110"
                           fill="currentColor"
                         >
-                          <path d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm0 2v14h14V5H5zm2 2h10v2H7V7zm0 4h10v2H7v-2zm0 4h6v2H7v-2z"/>
+                          <path d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm0 2v14h14V5H5zm2 2h10v2H7V7zm0 4h10v2H7v-2zm0 4h6v2H7v-2z" />
                         </svg>
                         <span className="font-medium">Get Started</span>
                       </a>
