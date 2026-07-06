@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { FaLock, FaShieldAlt, FaBolt } from "react-icons/fa";
+import { FaLock } from "react-icons/fa";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");

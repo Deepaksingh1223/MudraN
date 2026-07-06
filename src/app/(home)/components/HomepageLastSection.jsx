@@ -12,14 +12,14 @@ export default function HomePageSectionWhyChooseUs() {
       itemScope
       itemType="https://schema.org/WebPageElement"
     >
-      <div className="main-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="main-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 p-6">
         <div className="text-center">
           <div className="space-y-14">
             {/* text content */}
             <div className="space-y-3" itemScope itemProp="about">
               <h2 
                 id="cta-heading"
-                className="mx-auto max-w-[550px] text-2xl sm:text-3xl lg:text-4xl xl:text-5xl text-gray-800 font-normal"
+                className="mx-auto max-w-[550px] text-1xl sm:text-3xl lg:text-4xl xl:text-5xl text-gray-800 font-normal "
                 itemProp="name"
               >
                 Ready to spend crypto in real life?

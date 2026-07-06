@@ -70,10 +70,10 @@ export default function HomePageSectionWhyChooseUs() {
 
   return (
     <section className="py-18 md:py-20 lg:py-24 xl:py-39">
-      <div className="main-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="main-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 p-6">
         <div className="flex flex-col items-center justify-center gap-y-10 xl:flex-row xl:items-start xl:justify-between xl:gap-y-0">
           <div className="space-y-3 text-center sm:text-left">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl text-gray-800 font-normal w-full xl:max-w-[391px]">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl text-gray-800 font-normal  w-full xl:max-w-[391px]">
               Frequently Asked Questions
             </h2>
             <p className="w-full text-base sm:text-lg leading-[150%] font-normal text-gray-600 xl:max-w-[391px]">

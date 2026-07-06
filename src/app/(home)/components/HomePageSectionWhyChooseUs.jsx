@@ -56,14 +56,14 @@ export default function HomePageSectionWhyChooseUs() {
     <section 
       className="lx:rounded-[56px] mx-5 rounded-4xl bg-gradient-to-b from-[#142e6e] to-[#edf2ff] py-18 md:py-20 lg:py-24 xl:py-39" id="community"
     >
-      <div className="main-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="main-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 p-6">
         <div className="space-y-14 md:space-y-[70px]">
           {/* text content */}
           <div className="flex flex-col items-center justify-between gap-y-5 lg:flex-row">
             <div className="max-w-[700px] space-y-4 text-center lg:text-left xl:max-w-[905px]">
               <h2 
                 id="why-choose-us-heading"
-                className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl text-white font-normal"
+                className="text-1xl sm:text-3xl lg:text-4xl xl:text-5xl text-white font-normal"
                 itemProp="name"
               >
                Where crypto meets real life — empowering global payments with stablecoins

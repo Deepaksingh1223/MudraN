@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { useAuth } from "@/constants/authContext";
 import { FaEnvelope, FaLock, FaArrowRight } from "react-icons/fa";
 

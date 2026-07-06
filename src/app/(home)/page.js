@@ -1,5 +1,5 @@
 "use client";
- 
+
 import HomePageSectionHero from "./components/HomePageSectionHero";
 import HomePageSectionTrustedBy from "./components/HomePageSectionTrustedBy";
 import HomePageSectionServicesTabs from "./components/HomePageSectionServicesTabs";
@@ -10,7 +10,7 @@ import Impressive from "./components/Impressive";
 import Tokenomics from "./components/Tokenomics";
 import Faq from "./components/Faq";
 import Blog from "./components/Blog";
-import HomepageLastSection from "./components/HomepageLastSection";  
+import HomepageLastSection from "./components/HomepageLastSection";
 export default function HomePage() {
 
   return (
@@ -23,10 +23,10 @@ export default function HomePage() {
         <HomePageSectionSimplifyFinanceCards />
         {/* <HomePageSectionFooterCTA /> */}
         <Impressive />
-         <Tokenomics />
-       <Faq />
-         <Blog />
-               <HomepageLastSection />
+        <Tokenomics />
+        <Faq />
+        <Blog />
+        <HomepageLastSection />
       </main>
 
       <style jsx global>{`
