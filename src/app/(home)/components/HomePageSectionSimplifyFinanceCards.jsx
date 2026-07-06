@@ -19,11 +19,11 @@ export default function HomePageSectionSimplifyFinanceCards() {
     <section 
       className="py-18 md:py-20 lg:py-24 xl:py-39" id="card"
     >
-      <div className="main-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="main-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 p-6">
         <div className="space-y-14">
           {/* text content */}
           <div className="space-y-3 text-center lg:text-left" itemScope itemProp="about">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl text-gray-800 font-normal">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl text-gray-800 font-normal ">
               Spend Crypto, Live Easy — Simplify Your Finance
             </h2>
             <p className="max-w-[650px] text-base sm:text-lg leading-[150%] font-normal text-gray-600 mx-auto lg:mx-0 lg:max-w-[900px]">
@@ -40,7 +40,7 @@ export default function HomePageSectionSimplifyFinanceCards() {
           >
             {/* card one - Stablecoin Transfers */}
             <div className="col-span-12 md:col-span-4 lg:col-span-3" role="listitem">
-              <div className="flex h-[202px] w-full flex-col items-start justify-between rounded-[21px] bg-white p-4 lg:p-8" itemScope itemType="https://schema.org/Service" itemProp="hasOfferCatalog">
+              <div className="flex h-[202px] w-full flex-col items-start justify-between rounded-[21px] bg-white p-4 lg:p-8 " itemScope itemType="https://schema.org/Service" itemProp="hasOfferCatalog">
                 <span className="flex size-14 items-center justify-center rounded-xl bg-[#142E6E]" aria-hidden="true">
                   <FiGlobe className="size-6 text-white" />
                 </span>
@@ -52,7 +52,7 @@ export default function HomePageSectionSimplifyFinanceCards() {
 
             {/* card two - Multi-Currency Wallet */}
             <div className="col-span-12 md:col-span-4 lg:col-span-3" role="listitem">
-              <div className="flex h-[202px] w-full flex-col items-start justify-between rounded-[21px] bg-white p-4 lg:p-8" itemScope itemType="https://schema.org/Service" itemProp="hasOfferCatalog">
+              <div className="flex h-[202px] w-full flex-col items-start justify-between rounded-[21px] bg-white p-4 lg:p-8 " itemScope itemType="https://schema.org/Service" itemProp="hasOfferCatalog">
                 <span className="flex size-14 items-center justify-center rounded-xl bg-[#142E6E]" aria-hidden="true">
                   <FiTrendingUp className="size-6 text-white" />
                 </span>
@@ -64,7 +64,7 @@ export default function HomePageSectionSimplifyFinanceCards() {
 
             {/* card three - P2P Marketplace */}
             <div className="col-span-12 md:col-span-4 lg:col-span-3" role="listitem">
-              <div className="flex h-[202px] w-full flex-col items-start justify-between rounded-[21px] bg-white p-4 lg:p-8" itemScope itemType="https://schema.org/Service" itemProp="hasOfferCatalog">
+              <div className="flex h-[202px] w-full flex-col items-start justify-between rounded-[21px] bg-white p-4 lg:p-8 " itemScope itemType="https://schema.org/Service" itemProp="hasOfferCatalog">
                 <span className="flex size-14 items-center justify-center rounded-xl bg-[#142E6E]" aria-hidden="true">
                   <FiUsers className="size-6 text-white" />
                 </span>
@@ -91,7 +91,7 @@ export default function HomePageSectionSimplifyFinanceCards() {
 
             {/* card five - Spend Stablecoins Instantly (Desktop) */}
             <div className="hidden lg:col-span-3 lg:block" role="listitem">
-              <div className="flex h-[202px] w-full flex-col items-start justify-between rounded-[21px] bg-white p-4 lg:p-8" itemScope itemType="https://schema.org/Service" itemProp="hasOfferCatalog">
+              <div className="flex h-[202px] w-full flex-col items-start justify-between rounded-[21px] bg-white p-4 lg:p-8 " itemScope itemType="https://schema.org/Service" itemProp="hasOfferCatalog">
                 <span className="flex size-14 items-center justify-center rounded-xl bg-[#142E6E]" aria-hidden="true">
                   <FiCreditCard className="size-6 text-white" />
                 </span>
@@ -118,7 +118,7 @@ export default function HomePageSectionSimplifyFinanceCards() {
 
             {/* card seven - Handle all your crypto needs */}
             <div className="col-span-12 md:col-span-4 lg:col-span-3" role="listitem">
-              <div className="flex h-[202px] w-full flex-col items-start justify-between rounded-[21px] bg-white p-4 lg:p-8" itemScope itemType="https://schema.org/Service" itemProp="hasOfferCatalog">
+              <div className="flex h-[202px] w-full flex-col items-start justify-between rounded-[21px] bg-white p-4 lg:p-8 " itemScope itemType="https://schema.org/Service" itemProp="hasOfferCatalog">
                 <h3 className="text-lg sm:text-xl text-gray-800 font-normal max-w-[200px]" itemProp="name">
                   Handle all your crypto in one place
                 </h3>
@@ -141,7 +141,7 @@ export default function HomePageSectionSimplifyFinanceCards() {
 
             {/* card eight - Earn, Swap & P2P (Mobile/Tablet) */}
             <div className="col-span-4 hidden md:block lg:hidden" role="listitem">
-              <div className="flex h-[202px] w-full flex-col items-start justify-between rounded-[21px] bg-white p-4 lg:p-8" itemScope itemType="https://schema.org/Service" itemProp="hasOfferCatalog">
+              <div className="flex h-[202px] w-full flex-col items-start justify-between rounded-[21px] bg-white p-4 lg:p-8 " itemScope itemType="https://schema.org/Service" itemProp="hasOfferCatalog">
                 <span className="flex size-14 items-center justify-center rounded-xl bg-[#142E6E]" aria-hidden="true">
                   <FiZap className="size-6 text-white" />
                 </span>

@@ -77,7 +77,7 @@ export default function HomePageSectionServicesTabs() {
          
         {/* Subheading */}
         <div className="text-center mb-8 md:mb-12">
-          <h3 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-gray-900">
+          <h3 className="text-1xl sm:text-3xl md:text-4xl font-semibold text-gray-900">
           MDR Futuristics — Where Crypto Meets Real Life
           </h3>
           <p className="text-gray-600 mt-3 max-w-2xl mx-auto">

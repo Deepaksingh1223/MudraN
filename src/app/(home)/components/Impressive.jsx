@@ -68,7 +68,7 @@ export default function HomePageSectionWhyChooseUs() {
       itemScope
       itemType="https://schema.org/Service"
     >
-      <div className="main-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="main-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 p-6">
         <div className="space-y-14 lg:space-y-[70px]">
           {/* text content */}
           <div className="space-y-5 text-center" itemScope itemProp="about">
@@ -78,7 +78,7 @@ export default function HomePageSectionWhyChooseUs() {
             <div className="space-y-4">
               <h2 
                 id="impressive-templates-heading"
-                className="text-white mx-auto max-w-[800px] text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-normal"
+                className="text-white mx-auto max-w-[800px] text-1xl sm:text-3xl lg:text-4xl xl:text-5xl font-normal"
                 itemProp="name"
               >
                 Empowering global payments with stablecoins — seamless, fast, and secure

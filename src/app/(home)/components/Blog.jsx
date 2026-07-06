@@ -18,7 +18,7 @@ export default function HomePageSectionWhyChooseUs() {
       alt: "Stablecoin payments guide for everyday purchases and business transactions",
       date: "14.05.2025",
       readTime: "1 min",
-      link: "/blog/stablecoin-payments-guide",
+      link: "/",
       isLarge: true
     },
     {
@@ -28,7 +28,7 @@ export default function HomePageSectionWhyChooseUs() {
       alt: "Guide to spending cryptocurrency for everyday purchases like coffee and online shopping",
       date: "14.05.2025",
       readTime: "1 min",
-      link: "/blog/spend-crypto-real-life",
+      link: "/",
       isLarge: false
     },
     {
@@ -38,7 +38,7 @@ export default function HomePageSectionWhyChooseUs() {
       alt: "Multi-currency wallet guide for managing stablecoins and local currencies",
       date: "14.05.2025",
       readTime: "1 min",
-      link: "/blog/multi-currency-wallets",
+      link: "/",
       isLarge: false
     }
   ];
@@ -51,7 +51,7 @@ export default function HomePageSectionWhyChooseUs() {
       itemScope
       itemType="https://schema.org/Blog"
     >
-      <div className="main-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="main-container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 p-6">
         <div className="space-y-14">
           {/* text content */}
           <div className="sm:space-y-3 space-y-4 text-center" itemScope itemProp="about">
@@ -63,7 +63,7 @@ export default function HomePageSectionWhyChooseUs() {
             </span>
             <h2 
               id="blog-heading"
-              className="mx-auto max-w-[814px] text-white text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-normal"
+              className="mx-auto max-w-[814px] text-white text-1xl sm:text-3xl lg:text-4xl xl:text-5xl font-normal"
               itemProp="name"
             >
               Empowering global payments with stablecoins — fast, secure, and seamless
