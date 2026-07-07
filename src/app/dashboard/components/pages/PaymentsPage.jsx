@@ -2,82 +2,75 @@
 
 export default function PaymentsPage({ onGo, onToast }) {
   return (
-    <div className="dash-pad">
-      <div className="dash-bc">
+    <div className="pad">
+      <div className="bc">
         <span onClick={() => onGo("home")}>Dashboard</span>
         <span>›</span>
-        <span className="dash-cur">My Task</span>
+        <span className="cur">Payments</span>
       </div>
 
-      <div className="dash-h1">My Task</div>
+      <div className="h1">Payments</div>
 
-      <div >
-        <div className="dash-vi-tabs">
-          <div className="dash-vi-tab dash-active">Available (12)</div>
-          <div className="dash-vi-tab">In Progress (3)</div>
-          <div className="dash-vi-tab">Submitted (2)</div>
-          <div className="dash-vi-tab">Approved (178)</div>
-          <div className="dash-vi-tab">Rejected (5)</div>
+      <div className="g2">
+        <div className="card">
+          <div className="ch">
+            <div className="ct">Send Payment</div>
+          </div>
+
+          <label className="fl">Recipient</label>
+          <input className="fi" placeholder="Name, email or Mudra ID" />
+
+          <label className="fl">Amount</label>
+          <input className="fi" defaultValue={100} type="number" />
+
+          <label className="fl">Currency</label>
+          <select className="fi" defaultValue="USD">
+            <option>USD</option>
+            <option>INR</option>
+            <option>AED</option>
+            <option>EUR</option>
+            <option>USDT</option>
+          </select>
+
+          <label className="fl">Note (optional)</label>
+          <input className="fi" placeholder="Payment note" />
+
+          <button className="D-btn bg bfw" onClick={() => onToast("Payment sent successfully!")}>
+            <i className="ti ti-send" /> Send Payment
+          </button>
         </div>
-        <div className="dash-vi-task-grid">
-          <div className="dash-vi-task-card">
-            <div className="dash-vi-task-platform">
-              <div className="dash-vi-plat-icon" style={{ background: "rgba(66,133,244,0.1)" }}>🔍</div>
-              <div>
-                <div style={{ fontSize: "12px", fontWeight: 600, color: "var(--vi-text)" }}>Google</div>
-                <div className="dash-vi-plat-name">Search Task</div>
-              </div>
-            </div>
-            <div className="dash-vi-task-title">Search "Velt Impera Staking" keyword task</div>
-            <div className="dash-vi-task-meta">
-              <span className="dash-vi-tag dash-vi-tag-pts">+20 pts</span>
-              <span className="dash-vi-status dash-vi-status-approved" style={{ fontSize: "10px" }}>Approved</span>
-            </div>
-            <div className="dash-vi-task-progress-bar">
-              <div className="dash-vi-task-progress-fill" style={{ width: "100%" }}></div>
-            </div>
-            <div style={{ fontSize: "11px", color: "var(--vi-text3)" }}>Completed · 2 days ago</div>
+
+        <div className="card">
+          <div className="ch">
+            <div className="ct">Pending Payments</div>
+            <span className="nb">3</span>
           </div>
-          
-          <div className="dash-vi-task-card">
-            <div className="dash-vi-task-platform">
-              <div className="dash-vi-plat-icon" style={{ background: "rgba(255,0,0,0.1)" }}>📺</div>
-              <div>
-                <div style={{ fontSize: "12px", fontWeight: 600, color: "var(--vi-text)" }}>YouTube</div>
-                <div className="dash-vi-plat-name">Watch Task</div>
+
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+            {[
+              ["Netflix Subscription", "$15.99"],
+              ["Transfer to Priya", "$200.00"],
+              ["International Wire", "$326.72"],
+            ].map(([title, amt]) => (
+              <div key={title} style={{ background: "var(--sf3)", border: "1px solid var(--bd)", borderRadius: 9, padding: 12, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                <div>
+                  <div style={{ fontSize: 13, fontWeight: 500, color: "var(--tx)" }}>{title}</div>
+                  <div style={{ fontSize: 11, color: "var(--tx3)", marginTop: 2 }}>Due · Digital Card</div>
+                </div>
+                <div style={{ textAlign: "right" }}>
+                  <div style={{ fontSize: 13, fontWeight: 700, color: "var(--tx)" }}>{amt}</div>
+                  <div style={{ marginTop: 3 }}>
+                    <span className="pill pw"><i className="ti ti-clock" /> Pending</span>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="dash-vi-task-title">Watch Velt Impera promo &amp; answer question</div>
-            <div className="dash-vi-task-meta">
-              <span className="dash-vi-tag dash-vi-tag-pts">+15 pts</span>
-              <span className="dash-vi-status dash-vi-status-pending">Submitted</span>
-            </div>
-            <div className="dash-vi-task-progress-bar">
-              <div className="dash-vi-task-progress-fill" style={{ width: "100%" }}></div>
-            </div>
-            <div style={{ fontSize: "11px", color: "var(--vi-text3)" }}>Under verification · 20 min ago</div>
+            ))}
           </div>
-          
-          <div className="dash-vi-task-card">
-            <div className="dash-vi-task-platform">
-              <div className="dash-vi-plat-icon" style={{ background: "rgba(193,53,132,0.1)" }}>📸</div>
-              <div>
-                <div style={{ fontSize: "12px", fontWeight: 600, color: "var(--vi-text)" }}>Instagram</div>
-                <div className="dash-vi-plat-name">Follow &amp; Like</div>
-              </div>
-            </div>
-            <div className="dash-vi-task-title">Follow &amp; like 3 posts – in progress</div>
-            <div className="dash-vi-task-meta">
-              <span className="dash-vi-tag dash-vi-tag-pts">+25 pts</span>
-              <span className="dash-vi-status dash-vi-status-pending" style={{ background: "rgba(0,120,255,0.08)", color: "#0060cc" }}>In Progress</span>
-            </div>
-            <div className="dash-vi-task-progress-bar">
-              <div className="dash-vi-task-progress-fill" style={{ width: "60%" }}></div>
-            </div>
-            <div style={{ fontSize: "11px", color: "var(--vi-text3)" }}>60% done · Resume now</div>
-          </div>
+
+          <button className="btn bn bfw" style={{ marginTop: 10 }} onClick={() => onToast("All pending payments reviewed")}>Review All</button>
         </div>
       </div>
     </div>
   );
 }
+

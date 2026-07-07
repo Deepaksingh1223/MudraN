@@ -1,20 +1,5 @@
 "use client";
 
-import { 
-  FiCheck, 
-  FiClock, 
-  FiSparkles, 
-  FiBell, 
-  FiHeart, 
-  FiPlay, 
-  FiPause, 
-  FiSkipForward,
-  FiStar,
-  FiChevronRight,
-  FiHome
-} from "react-icons/fi";
-import { FaYoutube } from "react-icons/fa";
-
 export default function YouTubeTasksPage({
   onGo,
   onToast,
@@ -46,32 +31,32 @@ export default function YouTubeTasksPage({
   };
 
   return (
-    <div className="dash-pad">
-      <div className="dash-bc">
-        <span onClick={() => onGo("home")}>
-          <FiHome size={14} style={{ marginRight: 4 }} /> Dashboard
-        </span>
-        <FiChevronRight size={12} />
+    <div className="pad">
+      <div className="bc">
+        <span onClick={() => onGo("home")}>Dashboard</span>
+        <span>›</span>
         <span onClick={() => onGo("tasks")}>Loyalty Tasks</span>
-        <FiChevronRight size={12} />
-        <span className="dash-cur">YouTube</span>
+        <span>›</span>
+        <span className="cur">YouTube</span>
       </div>
 
       <div style={{ display: "flex", alignItems: "center", gap: 10, justifyContent: "space-between", flexWrap: "wrap" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <div style={{ width: 42, height: 42, borderRadius: 10, background: "#FF0000", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-            <FaYoutube size={22} color="white" />
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+              <path d="M23 7s-.3-2-1.2-2.8c-1.1-1.2-2.4-1.2-3-1.3C16.2 2.8 12 2.8 12 2.8s-4.2 0-6.8.1c-.6.1-1.9.1-3 1.3C1.3 5 1 7 1 7S.7 9.1.7 11.2v2c0 2 .3 4.2.3 4.2s.3 2 1.2 2.8c1.1 1.2 2.6 1.1 3.3 1.2C7.3 21.5 12 21.5 12 21.5s4.2 0 6.8-.2c.6-.1 1.9-.1 3-1.2.9-.8 1.2-2.8 1.2-2.8s.3-2.1.3-4.2v-2C23.3 9.1 23 7 23 7zM9.7 15.5V8.4l6.5 3.6-6.5 3.5z" />
+            </svg>
           </div>
           <div>
-            <div className="dash-h1">YouTube Tasks</div>
-            <div className="dash-sub">Watch, like and subscribe to earn MDR points</div>
+            <div className="h1">YouTube Tasks</div>
+            <div className="sub">Watch, like and subscribe to earn MDR points</div>
           </div>
         </div>
-        <span className="dash-pill dash-pd">4 / 6 Completed</span>
+        <span className="pill pd">4 / 6 Completed</span>
       </div>
 
-      <div className="dash-bar" style={{ height: 6 }}>
-        <div className="dash-bf" style={{ width: "67%" }} />
+      <div className="bar" style={{ height: 6 }}>
+        <div className="bf" style={{ width: "67%" }} />
       </div>
 
       {/* list */}
@@ -84,15 +69,15 @@ export default function YouTubeTasksPage({
           const badgeText =
             st === "done" ? (
               <>
-                <FiCheck size={12} /> Done
+                <i className="ti ti-check" /> Done
               </>
             ) : st === "progress" ? (
               <>
-                <FiClock size={12} /> Progress
+                <i className="ti ti-clock" /> Progress
               </>
             ) : (
               <>
-                <FiSparkles size={12} /> New
+                <i className="ti ti-sparkles" /> New
               </>
             );
 
@@ -107,7 +92,7 @@ export default function YouTubeTasksPage({
               </button>
             ) : v.type ? (
               <button
-                className="btn dash-btn-muted dashboard-btn dash-bxs"
+                className="btn bn bxs"
                 style={{ marginTop: 3, fontSize: 11 }}
                 onClick={() => onToast("Task opened — complete on YouTube")}
               >
@@ -117,11 +102,11 @@ export default function YouTubeTasksPage({
 
           const ico =
             !isWatched && v.type === "sub" ? (
-              <FiBell size={15} color="#fff" />
+              <i className="ti ti-bell" style={{ fontSize: 15, color: "#fff" }} />
             ) : !isWatched && v.type === "like" ? (
-              <FiHeart size={15} color="#fff" />
+              <i className="ti ti-heart" style={{ fontSize: 15, color: "#fff" }} />
             ) : (
-              <FiPlay size={15} color="#fff" />
+              <i className="ti ti-player-play" style={{ fontSize: 15, color: "#fff" }} />
             );
 
           return (
@@ -131,21 +116,21 @@ export default function YouTubeTasksPage({
                 if (isWatched) openVid(v.id);
               }}
             >
-              <div className="dash-tico" style={{ background: "#FF0000" }}>
+              <div className="tico" style={{ background: isWatched ? "#FF0000" : "#FF0000" }}>
                 {ico}
               </div>
-              <div className="dash-tb">
-                <div className="dash-tt">{v.title}</div>
-                <div className="dash-td">{v.desc}{v.dur ? " · " + fmt(v.dur) : ""}</div>
-                <div className="dash-tpg">
-                  <div className="dash-bar" style={{ flex: 1 }}>
-                    <div className="dash-bf" style={{ width: pr + "%" }} />
+              <div className="tb">
+                <div className="tt">{v.title}</div>
+                <div className="td">{v.desc}{v.dur ? " · " + fmt(v.dur) : ""}</div>
+                <div className="tpg">
+                  <div className="bar" style={{ flex: 1 }}>
+                    <div className="bf" style={{ width: pr + "%" }} />
                   </div>
-                  <span className="dash-tpct">{pr}%</span>
+                  <span className="tpct">{pr}%</span>
                 </div>
               </div>
-              <div className="dash-tr-r">
-                <div className="dash-pts">+{v.pts} pts</div>
+              <div className="tr-r">
+                <div className="pts">+{v.pts} pts</div>
                 <span className={"pill " + badgeCls}>{badgeText}</span>
                 {action}
               </div>
@@ -156,45 +141,43 @@ export default function YouTubeTasksPage({
 
       {/* player */}
       {curVid ? (
-        <div style={{ marginTop: 14 }} className="dash-card">
-          <div className="dash-bc" style={{ marginBottom: 10 }}>
+        <div style={{ marginTop: 14 }} className="card">
+          <div className="bc" style={{ marginBottom: 10 }}>
             <span onClick={closeVid}>‹ Back to List</span>
             <span>•</span>
-            <span className="dash-cur">{VIDS[curVid].title}</span>
+            <span className="cur">{VIDS[curVid].title}</span>
           </div>
 
-          <div className="dash-g2" style={{ alignItems: "start" }}>
+          <div className="g2" style={{ alignItems: "start" }}>
             <div>
-              <div className="dash-vid-wrap">
+              <div className="vid-wrap">
                 <div
-                  className="dash-vid-screen"
+                  className="vid-screen"
                   onClick={() => {
                     togglePlay();
                   }}
                 >
-                  <div className="dash-vid-init">
-                    <div className="dash-play-big">
-                      {playing ? <FiPause size={32} /> : <FiPlay size={32} />}
-                    </div>
+                  <div className="vid-init">
+                    <div className="play-big">{playing ? <i className="ti ti-player-pause" /> : <i className="ti ti-player-play" />}</div>
                   </div>
                 </div>
               </div>
 
-              <div className="dash-vc">
-                <div className="dash-vc-btn" onClick={togglePlay} aria-label="Play/Pause">
-                  {playing ? <FiPause size={16} /> : <FiPlay size={16} />}
+              <div className="vc">
+                <div className="vc-btn" onClick={togglePlay} aria-label="Play/Pause">
+                  {playing ? <i className="ti ti-player-pause" /> : <i className="ti ti-player-play" />}
                 </div>
-                <span className="dash-vct">{fmt(elapsed)}</span>
+                <span className="vct">{fmt(elapsed)}</span>
                 <div
-                  className="dash-vc-bar"
+                  className="vc-bar"
                   onClick={(e) => {
                     const rect = e.currentTarget.getBoundingClientRect();
                     seek(e.clientX, rect.left, rect.width);
                   }}
                 >
-                  <div className="dash-vc-prog" style={{ width: totalDur ? Math.round((elapsed / totalDur) * 100) + "%" : "0%" }} />
+                  <div className="vc-prog" style={{ width: totalDur ? Math.round((elapsed / totalDur) * 100) + "%" : "0%" }} />
                 </div>
-                <span className="dash-vct">{fmt(totalDur)}</span>
+                <span className="vct">{fmt(totalDur)}</span>
               </div>
             </div>
 
@@ -208,9 +191,9 @@ export default function YouTubeTasksPage({
                     </div>
                     <div />
                   </div>
-                  <div className="dash-bar" style={{ height: 7, marginBottom: 10 }}>
+                  <div className="bar" style={{ height: 7, marginBottom: 10 }}>
                     <div
-                      className="dash-bf"
+                      className="bf"
                       style={{
                         height: "100%",
                         borderRadius: 3,
@@ -224,18 +207,18 @@ export default function YouTubeTasksPage({
               ) : null}
 
               <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                <button className="dash-D-btn dash-btn-fill dash-bsm" onClick={togglePlay} style={{ width: "100%" }}>
-                  {playing ? <FiPause size={14} /> : <FiPlay size={14} />} {playing ? "Pause" : "Play"}
+                <button className="D-btn bg bsm" onClick={togglePlay} style={{ width: "100%" }}>
+                  <i className="ti ti-player-play" /> {playing ? "Pause" : "Play"}
                 </button>
-                <button className="btn dash-btn-muted dashboard-btn dash-bsm" onClick={skipFwd} style={{ width: "100%" }}>
-                  <FiSkipForward size={14} /> +10s
+                <button className="btn bn bsm" onClick={skipFwd} style={{ width: "100%" }}>
+                  <i className="ti ti-player-track-next" /> +10s
                 </button>
                 <button
-                  className="dash-D-btn dash-btn-fill dash-bfw  dashboard-btn"
+                  className="D-btn bg bfw"
                   onClick={claimVid}
                   style={{ background: "var(--grbg)", border: "1px solid var(--grd)", color: "var(--gr)" }}
                 >
-                  <FiStar size={14} /> Claim {VIDS[curVid].pts} Points!
+                  <i className="ti ti-star" /> Claim {VIDS[curVid].pts} Points!
                 </button>
               </div>
             </div>
@@ -245,3 +228,4 @@ export default function YouTubeTasksPage({
     </div>
   );
 }
+

@@ -1,60 +1,113 @@
 "use client";
 
-import { FiMenu, FiX, FiSun, FiMoon, FiUser } from "react-icons/fi";
+import { useState } from "react";
+import { FiMenu, FiX } from "react-icons/fi";
+import { FiSun, FiMoon } from "react-icons/fi";
+import { FiBell } from "react-icons/fi";
+import { FiStar } from "react-icons/fi";
 
+export default function Topbar({ onToggleDark, onGo, points, dark }) {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
-export default function Topbar({
-  onToggleDark,
-  points,
-  dark,
-  sidebarOpen,
-  onToggleSidebar,
-}) {
+  const handleToggleSidebar = () => {
+    const newState = !isSidebarOpen;
+    setIsSidebarOpen(newState);
+    
+    const sidebar = document.querySelector('.sb');
+    if (sidebar) {
+      if (newState) {
+        sidebar.style.transform = 'translateX(0%)';
+      } else {
+        sidebar.style.transform = 'translateX(-100%)';
+      }
+    }
+  };
+
   return (
-    <header className="dash-topbar sticky top-0 z-20 flex h-[52px] shrink-0 items-center gap-2.5 border-b border-dashboard-bd bg-dashboard-sf px-4 transition-colors duration-200 max-[600px]:gap-2 max-[600px]:px-3">
-      <div className="dash-ticker flex min-w-0 flex-1 gap-3 overflow-hidden">
-        <div className="dash-tk flex items-center gap-1.5 whitespace-nowrap">
-          <span className="dash-tk-s text-[10px] font-bold text-dashboard-tx3">BTC</span>
-          <span className="dash-tk-p text-[11.5px] font-semibold text-dashboard-tx">$67,842</span>
-          <span className="dash-chip dash-chip-up flex-text-icon rounded-full border px-1.5 py-0.5 text-[9px] font-bold bg-dashboard-grbg text-dashboard-gr border-dashboard-grd">
-            +2.4%
-          </span>
+    <div className="topbar">
+      <div className="ticker">
+        <div className="tk">
+          <span className="tk-s">BTC</span>
+          <span className="tk-p">$67,842</span>
+          <span className="chip up">+2.4%</span>
         </div>
-        <div className="dash-tk flex items-center gap-1.5 whitespace-nowrap max-[600px]:hidden">
-          <span className="dash-tk-s text-[10px] font-bold text-dashboard-tx3">ETH</span>
-          <span className="dash-tk-p text-[11.5px] font-semibold text-dashboard-tx">$3,491</span>
-          <span className="dash-chip dash-chip-up flex-text-icon rounded-full border px-1.5 py-0.5 text-[9px] font-bold bg-dashboard-grbg text-dashboard-gr border-dashboard-grd">
-            +1.8%
-          </span>
+        <div className="tk">
+          <span className="tk-s">ETH</span>
+          <span className="tk-p">$3,491</span>
+          <span className="chip up">+1.8%</span>
         </div>
-        <div className="dash-tk flex items-center gap-1.5 whitespace-nowrap max-[900px]:hidden">
-          <span className="dash-tk-s text-[10px] font-bold text-dashboard-tx3">Velt</span>
-          <span className="dash-tk-p text-[11.5px] font-semibold text-dashboard-tx">$0.0009</span>
+        <div className="tk">
+          <span className="tk-s">MDR</span>
+          <span className="tk-p">$0.0847</span>
+          <span className="chip dn">-0.6%</span>
+        </div>
+        <div className="tk">
+          <span className="tk-s">USDT</span>
+          <span className="tk-p">$1.00</span>
+          <span className="chip up">+0.01%</span>
         </div>
       </div>
 
-      <div className="dash-tb-r ml-auto flex shrink-0 items-center gap-[7px]">
-        <div className="dash-tb-bal flex items-center gap-1 rounded-[7px] border border-dashboard-gbdr bg-dashboard-gdim px-2.5 py-1.5 text-[11px] font-bold text-dashboard-glt max-[600px]:hidden">
-          <FiUser size={12} />
-          MUDRA@gmail.com
+      <div className="tb-r">
+    
+
+        <div
+          className="tbi"
+          onClick={() => onGo("notifications")}
+          role="button"
+          aria-label="Notifications"
+          style={{ position: "relative" }}
+        >
+          <FiBell size={18} />
+          <span
+            style={{
+              position: "absolute",
+              top: 5,
+              right: 5,
+              width: 7,
+              height: 7,
+              background: "#DC2626",
+              borderRadius: "50%",
+              border: "2px solid var(--sf)",
+            }}
+          />
         </div>
-        <button
-          type="button"
-          className="dash-tbi flex h-8 w-8 shrink-0 cursor-pointer items-center justify-center rounded-[7px] border border-dashboard-bd bg-dashboard-sf3 text-lg text-dashboard-tx transition-all duration-150 hover:bg-dashboard-sf2"
-          onClick={onToggleDark}
+
+        <div className="tb-bal">
+          <FiStar size={12} />
+          {points}
+        </div>
+        <div className="av" style={{ cursor: "pointer" }} onClick={() => onGo("settings")}>AK</div>
+           <button 
+          className="tbi" 
+          onClick={onToggleDark} 
           aria-label="Toggle theme"
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontSize: "18px",
+          }}
         >
           {dark ? <FiSun /> : <FiMoon />}
         </button>
-        <button
-          type="button"
-          className="dash-tbi dash-hamburger hidden h-8 w-8 shrink-0 cursor-pointer items-center justify-center rounded-[7px] border border-dashboard-bd bg-dashboard-sf3 text-xl text-dashboard-tx transition-all duration-150 hover:bg-dashboard-sf2 max-[991px]:flex"
-          onClick={onToggleSidebar}
-          aria-label={sidebarOpen ? "Close menu" : "Open menu"}
+            {/* Hamburger / Close Menu Button */}
+        <button 
+          className="tbi hamburger" 
+          onClick={handleToggleSidebar}
+          aria-label={isSidebarOpen ? "Close menu" : "Open menu"}
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontSize: "20px",
+          }}
         >
-          {sidebarOpen ? <FiX /> : <FiMenu />}
+          {isSidebarOpen ? <FiX /> : <FiMenu />}
         </button>
+
+     
       </div>
-    </header>
+    </div>
   );
 }

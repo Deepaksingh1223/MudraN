@@ -1,9 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { MdEmojiEvents, MdMilitaryTech, MdVerified, MdPending } from "react-icons/md";
-import { IoFlash, IoWallet, IoInfinite, IoPeople } from "react-icons/io5";
-import { FaGem, FaCoins } from "react-icons/fa";
 
 export default function ExchangePage({ onGo, onToast }) {
   const [sendAmount, setSendAmount] = useState(0.42);
@@ -23,128 +20,101 @@ export default function ExchangePage({ onGo, onToast }) {
   }, [sendAmount]);
 
   return (
-    <div className="dash-pad">
-      <div className="dash-bc">
+    <div className="pad">
+      <div className="bc">
         <span onClick={() => onGo("home")}>Dashboard</span>
         <span>›</span>
-        <span className="dash-cur">Task History</span>
+        <span className="cur">Crypto Exchange</span>
       </div>
-      <div className="dash-h1">Task History</div>
-      
-      <div>
-          <div className="dash-vi-wallet-card">
-                  <div className="dash-vi-wallet-vip">
-                    <IoFlash style={{ marginRight: "6px", color: "#ffd700" }} />
-                    EMERALD
-                    <FaGem style={{ marginLeft: "6px", color: "#50c878" }} />
-                  </div>
-                  <div className="dash-vi-wallet-label">
-                    <IoWallet style={{ marginRight: "6px" }} />
-                    TOTAL REWARD POINTS
-                  </div>
-                  <div className="dash-vi-wallet-balance">4,820</div>
-                  <div className="dash-vi-wallet-pts">
-                    <FaCoins style={{ marginRight: "4px" }} />
-                    ≈ $48.20 USDT value · Updated just now
-                  </div>
-                  <div className="dash-vi-wallet-row">
-                    <div className="dash-vi-wallet-mini">
-                      <div className="dash-vi-wallet-mini-label">
-                        <MdPending style={{ marginRight: "4px", fontSize: "12px" }} />
-                        Pending
-                      </div>
-                      <div className="dash-vi-wallet-mini-val">215</div>
-                    </div>
-                    <div className="dash-vi-wallet-mini">
-                      <div className="dash-vi-wallet-mini-label">
-                        <MdVerified style={{ marginRight: "4px", fontSize: "12px", color: "#22c55e" }} />
-                        Approved
-                      </div>
-                      <div className="dash-vi-wallet-mini-val">4,605</div>
-                    </div>
-                    <div className="dash-vi-wallet-mini">
-                      <div className="dash-vi-wallet-mini-label">
-                        <IoInfinite style={{ marginRight: "4px", fontSize: "12px" }} />
-                        Lifetime
-                      </div>
-                      <div className="dash-vi-wallet-mini-val">8,340</div>
-                    </div>
-                    <div className="dash-vi-wallet-mini">
-                      <div className="dash-vi-wallet-mini-label">
-                        <IoPeople style={{ marginRight: "4px", fontSize: "12px" }} />
-                        Referrals
-                      </div>
-                      <div className="dash-vi-wallet-mini-val">340</div>
-                    </div>
-                  </div>
+      <div className="h1">Crypto Exchange</div>
+
+      <div className="g2">
+        <div className="card">
+          <div className="ch">
+            <div>
+              <div className="ct">New Exchange</div>
+              <div className="cs">0.3% platform fee · Live rates</div>
+            </div>
+          </div>
+
+          <div style={{ display: "flex", flexDirection: "column", gap: 7 }}>
+            <div className="ex-box">
+              <div className="ex-lbl">You send</div>
+              <div className="ex-row">
+                <input
+                  className="ex-amt"
+                  value={sendAmount}
+                  onChange={(e) => setSendAmount(e.target.value)}
+                />
+                <div className="ccy">
+                  <div className="ccy-dot" style={{ background: "#F7931A", color: "#fff" }}>B</div>BTC
+                  <i className="ti ti-chevron-down" style={{ fontSize: 11, color: "var(--tx3)" }} aria-hidden="true" />
                 </div>
-        <div className="dash-vi-card">
-          <div className="dash-vi-card-body" style={{ padding: 0 }}>
-            <table className="dash-vi-table">
-              <thead>
-                <tr>
-                  <th>Task</th>
-                  <th>Platform</th>
-                  <th>Date</th>
-                  <th>Points</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Google Search — Debit Card</td>
-                  <td>🔍 Google</td>
-                  <td>Today</td>
-                  <td style={{ color: "var(--vi-green)", fontWeight: 700 }}>+20</td>
-                  <td><span className="dash-vi-status dash-vi-status-approved">Approved</span></td>
-                </tr>
-                <tr>
-                  <td>YouTube Watch &amp; Like Task</td>
-                  <td>📺 YouTube</td>
-                  <td>Today</td>
-                  <td style={{ color: "var(--vi-green)", fontWeight: 700 }}>+15</td>
-                  <td><span className="dash-vi-status dash-vi-status-pending">Pending</span></td>
-                </tr>
-                <tr>
-                  <td>Instagram Follow Campaign</td>
-                  <td>📸 Instagram</td>
-                  <td>Yesterday</td>
-                  <td style={{ color: "var(--vi-green)", fontWeight: 700 }}>+25</td>
-                  <td><span className="dash-vi-status dash-vi-status-approved">Approved</span></td>
-                </tr>
-                <tr>
-                  <td>WhatsApp Status 24h Task</td>
-                  <td>💬 WhatsApp</td>
-                  <td>2 days ago</td>
-                  <td style={{ color: "var(--vi-green)", fontWeight: 700 }}>+30</td>
-                  <td><span className="dash-vi-status dash-vi-status-approved">Approved</span></td>
-                </tr>
-                <tr>
-                  <td>X Retweet Campaign</td>
-                  <td>🐦 X/Twitter</td>
-                  <td>3 days ago</td>
-                  <td style={{ color: "#c03030", fontWeight: 700 }}>0</td>
-                  <td><span className="dash-vi-status dash-vi-status-rejected">Rejected</span></td>
-                </tr>
-                <tr>
-                  <td>Telegram Group Join Task</td>
-                  <td>✈️ Telegram</td>
-                  <td>4 days ago</td>
-                  <td style={{ color: "var(--vi-green)", fontWeight: 700 }}>+18</td>
-                  <td><span className="dash-vi-status dash-vi-status-approved">Approved</span></td>
-                </tr>
-                <tr>
-                  <td>Survey — Product Feedback</td>
-                  <td>📋 Survey</td>
-                  <td>5 days ago</td>
-                  <td style={{ color: "var(--vi-green)", fontWeight: 700 }}>+50</td>
-                  <td><span className="dash-vi-status dash-vi-status-approved">Approved</span></td>
-                </tr>
-              </tbody>
-            </table>
+              </div>
+            </div>
+
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <div className="swap-btn" onClick={() => onToast("Pair swapped")}>
+                <i className="ti ti-arrows-up-down" aria-hidden="true" />
+              </div>
+            </div>
+
+            <div className="ex-box">
+              <div className="ex-lbl">You receive</div>
+              <div className="ex-row">
+                <input className="ex-amt" value={receive.toFixed(2)} readOnly style={{ color: "var(--glt)" }} />
+                <div className="ccy">
+                  <div className="ccy-dot" style={{ background: "#16A34A", color: "#fff" }}>$</div>USD
+                  <i className="ti ti-chevron-down" style={{ fontSize: 11, color: "var(--tx3)" }} aria-hidden="true" />
+                </div>
+              </div>
+            </div>
+
+            <div className="rate-bar">
+              <span>1 BTC = ${rate.toLocaleString(undefined, { maximumFractionDigits: 2 })} USD</span>
+              <span><span className="live" />Live</span>
+            </div>
+
+            <div style={{ margin: "2px 0" }}>
+              <div className="fr">
+                <span className="fk">Network Fee</span>
+                <span className="fv">${networkFee.toFixed(2)}</span>
+              </div>
+              <div className="fr">
+                <span className="fk">Platform Fee (0.3%)</span>
+                <span className="fv">${platformFee.toFixed(2)}</span>
+              </div>
+              <div className="fr">
+                <span className="fk">Est. Arrival</span>
+                <span className="fv" style={{ color: "var(--gr)" }}>~2 min</span>
+              </div>
+            </div>
+
+            <button className="D-btn bg bfw" onClick={() => onToast("Exchange placed — funds arrive in ~2 min")}>
+              <i className="ti ti-arrows-right-left" />Confirm Exchange
+            </button>
+          </div>
+        </div>
+
+        <div className="card">
+          <div className="ch"><div className="ct">Supported Pairs</div></div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 7 }}>
+            {[
+              ["BTC → USD", "$67,842"],
+              ["ETH → INR", "₹91,600"],
+              ["USDT → AED", "3.67 AED"],
+              ["MDR → EUR", "€0.0782"],
+              ["BTC → AED", "249,220 AED"],
+            ].map(([t, p]) => (
+              <div key={t} style={{ background: "var(--sf3)", border: "1px solid var(--bd)", borderRadius: 8, padding: "10px 13px", display: "flex", justifyContent: "space-between", alignItems: "center", cursor: "pointer" }} onClick={() => onToast(t + " selected")}>
+                <span style={{ fontWeight: 500, color: "var(--tx)" }}>{t}</span>
+                <span style={{ color: "var(--gr)", fontWeight: 600 }}>{p}</span>
+              </div>
+            ))}
           </div>
         </div>
       </div>
     </div>
   );
 }
+

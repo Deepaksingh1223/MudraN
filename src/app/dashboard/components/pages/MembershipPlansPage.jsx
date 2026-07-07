@@ -1,90 +1,130 @@
 "use client";
 
-import { MdEmojiEvents, MdTask, MdVerified } from "react-icons/md";
-import { FaFire, FaBolt, FaUsers, FaSearch, FaShareAlt, FaChartLine } from "react-icons/fa";
-import { GiAchievement } from "react-icons/gi";
-
 export default function MembershipPlansPage({ onGo, onToast }) {
   return (
-    <div className="dash-pad">
-      <div className="dash-bc">
+    <div className="pad">
+      <div className="bc">
         <span onClick={() => onGo("home")}>Dashboard</span>
         <span>›</span>
-        <span className="dash-cur">Achievements</span>
+        <span className="cur">Membership Plans</span>
       </div>
 
-      <div className="dash-h1">Achievements</div>
-      
-      <div >
-        <div className="dash-vi-badge-grid" style={{ marginBottom: "14px" }}>
-          <div className="dash-vi-badge dash-earned">
-            <div className="dash-vi-badge-icon flex justify-center items-center"><MdEmojiEvents /></div>
-            <div className="dash-vi-badge-name">First Task</div>
-            <div className="dash-vi-badge-prog" style={{ color: "var(--vi-green)" }}>Earned</div>
-          </div>
-          <div className="dash-vi-badge dash-earned">
-            <div className="dash-vi-badge-icon flex justify-center items-center"><MdTask /></div>
-            <div className="dash-vi-badge-name">100 Tasks</div>
-            <div className="dash-vi-badge-prog" style={{ color: "var(--vi-green)" }}>Earned</div>
-          </div>
-          <div className="dash-vi-badge">
-            <div className="dash-vi-badge-icon flex justify-center items-center"><FaFire /></div>
-            <div className="dash-vi-badge-name">500 Tasks</div>
-            <div className="dash-vi-badge-prog">183 / 500</div>
-          </div>
-          <div className="dash-vi-badge">
-            <div className="dash-vi-badge-icon flex justify-center items-center"><FaBolt /></div>
-            <div className="dash-vi-badge-name">1000 Tasks</div>
-            <div className="dash-vi-badge-prog">183 / 1000</div>
-          </div>
-          <div className="dash-vi-badge dash-earned">
-            <div className="dash-vi-badge-icon flex justify-center items-center"><FaUsers /></div>
-            <div className="dash-vi-badge-name">Referral Champ</div>
-            <div className="dash-vi-badge-prog" style={{ color: "var(--vi-green)" }}>Earned</div>
-          </div>
-          <div className="dash-vi-badge dash-earned">
-            <div className="dash-vi-badge-icon flex justify-center items-center"><FaSearch /></div>
-            <div className="dash-vi-badge-name">Search Master</div>
-            <div className="dash-vi-badge-prog" style={{ color: "var(--vi-green)" }}>Earned</div>
-          </div>
-          <div className="dash-vi-badge">
-            <div className="dash-vi-badge-icon flex justify-center items-center"><FaShareAlt /></div>
-            <div className="dash-vi-badge-name">Social Influencer</div>
-            <div className="dash-vi-badge-prog">34 / 50 tasks</div>
-          </div>
-          <div className="dash-vi-badge">
-            <div className="dash-vi-badge-icon flex justify-center items-center"><FaChartLine /></div>
-            <div className="dash-vi-badge-name">Leaderboard Hero</div>
-            <div className="dash-vi-badge-prog">Rank 8 / need 5</div>
+      <div className="h1">Membership Plans</div>
+
+      <div className="g3">
+        <div className="pc-card">
+          <div style={{ fontSize: 14, fontWeight: 700, color: "var(--tx2)" }}>Silver</div>
+          <div>
+            <div style={{ fontSize: 28, fontWeight: 800, color: "var(--tx2)" }}>$50</div>
+            <div style={{ fontSize: 10, color: "var(--tx3)", marginTop: 1 }}>per year</div>
+
+            <ul
+              style={{
+                listStyle: "none",
+                display: "flex",
+                flexDirection: "column",
+                gap: 7,
+                flex: 1,
+                padding: 0,
+                margin: 0,
+              }}
+            >
+              {["1 Digital Card", "Basic Crypto Exchange", "Loyalty Tasks Access", "1% MDR Cashback"].map((x) => (
+                <li key={x} className="chk-i">
+                  <div className="chk-c">
+                    <i className="ti ti-check" />
+                  </div>
+                  {x}
+                </li>
+              ))}
+            </ul>
+
+            <button
+              className="btn bn bfw"
+              onClick={() => onToast("Silver plan selected — redirecting to checkout")}
+            >
+              Select Silver
+            </button>
           </div>
         </div>
-        
-        <div className="dash-vi-card">
-          <div className="dash-vi-card-header">
-            <div className="dash-vi-card-title">Progress Toward Next Badge</div>
+
+        <div className="pc-card feat">
+          <div className="pc-badge">CURRENT PLAN</div>
+          <div style={{ fontSize: 14, fontWeight: 700, color: "var(--tx)" }}>Gold</div>
+          <div>
+            <div style={{ fontSize: 28, fontWeight: 800, color: "var(--glt)" }}>$100</div>
+            <div style={{ fontSize: 10, color: "var(--tx3)", marginTop: 1 }}>per year · Renews Dec 14</div>
+
+            <ul
+              style={{
+                listStyle: "none",
+                display: "flex",
+                flexDirection: "column",
+                gap: 7,
+                flex: 1,
+                padding: 0,
+                margin: 0,
+              }}
+            >
+              {["1 Physical + 1 Digital Card", "Unlimited Crypto Exchange", "All Loyalty Tasks", "2% MDR Cashback", "Priority Support"].map(
+                (x) => (
+                  <li key={x} className="chk-i">
+                    <div className="chk-c">
+                      <i className="ti ti-check" />
+                    </div>
+                    {x}
+                  </li>
+                )
+              )}
+            </ul>
+
+            <button className="D-btn bg bfw" onClick={() => onToast("You're already on Gold — renewing Dec 14!")}
+            >
+              Active Plan
+            </button>
           </div>
-          <div className="dash-vi-card-body">
-            <div style={{ marginBottom: "12px" }}>
-              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "5px" }}>
-                <span style={{ fontSize: "12.5px", fontWeight: 500, color: "var(--tx)" }}>500 Tasks Badge</span>
-                <span style={{ fontSize: "12px", color: "var(--vi-green)", fontWeight: 700 }}>183 / 500</span>
-              </div>
-              <div style={{ height: "6px", background: "var(--vi-surface2)", borderRadius: "3px", overflow: "hidden" }}>
-                <div style={{ height: "100%", width: "37%", background: "linear-gradient(90deg,var(--vi-green),var(--vi-green-mid))", borderRadius: "3px" }}></div>
-              </div>
-            </div>
-            <div>
-              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "5px" }}>
-                <span style={{ fontSize: "12.5px", fontWeight: 500, color: "var(--tx)" }}>Social Influencer</span>
-                <span style={{ fontSize: "12px", color: "var(--vi-green)", fontWeight: 700 }}>34 / 50</span>
-              </div>
-              <div style={{ height: "6px", background: "var(--vi-surface2)", borderRadius: "3px", overflow: "hidden" }}>
-                <div style={{ height: "100%", width: "68%", background: "linear-gradient(90deg,var(--vi-green),var(--vi-green-mid))", borderRadius: "3px" }}></div>
-              </div>
-            </div>
+        </div>
+
+        <div className="pc-card">
+          <div style={{ fontSize: 14, fontWeight: 700, color: "var(--gold)" }}>Platinum</div>
+          <div>
+            <div style={{ fontSize: 28, fontWeight: 800, color: "var(--gold)" }}>$200</div>
+            <div style={{ fontSize: 10, color: "var(--tx3)", marginTop: 1 }}>per year · Best value</div>
+
+            <ul
+              style={{
+                listStyle: "none",
+                display: "flex",
+                flexDirection: "column",
+                gap: 7,
+                flex: 1,
+                padding: 0,
+                margin: 0,
+              }}
+            >
+              {[
+                "3 Cards (any type)",
+                "Zero Exchange Fees",
+                "Double Loyalty Points",
+                "4% MDR Cashback",
+                "Dedicated Account Manager",
+              ].map((x) => (
+                <li key={x} className="chk-i">
+                  <div className="chk-c">
+                    <i className="ti ti-check" />
+                  </div>
+                  {x}
+                </li>
+              ))}
+            </ul>
+
+            <button className="btn bo bfw" onClick={() => onToast("Upgrading to Platinum — checkout opened")}>
+              Upgrade to Platinum
+            </button>
           </div>
         </div>
       </div>
     </div>
   );
 }
+

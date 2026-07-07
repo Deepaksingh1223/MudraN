@@ -29,19 +29,19 @@ export default function SocialTasksPage({
   const listVisible = !openSocId;
 
   const renderBadge = (st) => {
-    if (st === "done") return <span className="dash-pill dash-pd"><i className="ti ti-check" />Done</span>;
-    if (st === "progress") return <span className="dash-pill dash-pp"><i className="ti ti-clock" />Progress</span>;
-    return <span className="dash-pill dash-pn"><i className="ti ti-sparkles" />New</span>;
+    if (st === "done") return <span className="pill pd"><i className="ti ti-check" />Done</span>;
+    if (st === "progress") return <span className="pill pp"><i className="ti ti-clock" />Progress</span>;
+    return <span className="pill pn"><i className="ti ti-sparkles" />New</span>;
   };
 
   return (
-    <div className="dash-pad">
-      <div className="dash-bc">
+    <div className="pad">
+      <div className="bc">
         <span onClick={() => onGo("home")}>Dashboard</span>
         <span>›</span>
         <span onClick={() => onGo("tasks")}>Loyalty Tasks</span>
         <span>›</span>
-        <span className="dash-cur">{platformTitle}</span>
+        <span className="cur">{platformTitle}</span>
       </div>
 
       <div style={{ display: "flex", alignItems: "center", gap: 10, justifyContent: "space-between", flexWrap: "wrap" }}>
@@ -70,15 +70,15 @@ export default function SocialTasksPage({
             {platformKey === "fb" ? "f" : platformKey === "li" ? "in" : platformKey === "tw" ? "𝑂" : "◎"}
           </div>
           <div>
-            <div className="dash-h1">{platformTitle} Tasks</div>
-            <div className="dash-sub">Complete tasks to earn MDR points</div>
+            <div className="h1">{platformTitle} Tasks</div>
+            <div className="sub">Complete tasks to earn MDR points</div>
           </div>
         </div>
         <span className={platformKey === "fb" ? "pill pn" : "pill pn"}>2 / 6 Completed</span>
       </div>
 
-      <div className="dash-bar" style={{ height: 6 }}>
-        <div className="dash-bf" style={{ width: "33%" }} />
+      <div className="bar" style={{ height: 6 }}>
+        <div className="bf" style={{ width: "33%" }} />
       </div>
 
       <div style={{ display: "flex", flexDirection: "column", gap: 8, marginTop: 8 }}>
@@ -100,7 +100,7 @@ export default function SocialTasksPage({
               style={{ cursor: "pointer" }}
               onClick={() => onOpenTask(platformKey, id)}
             >
-              <div className="dash-tico" style={{ background: col }}>{/* icon */}
+              <div className="tico" style={{ background: col }}>{/* icon */}
                 <i className={
                   t.k === "like" ? "ti ti-heart" :
                   t.k === "comment" ? "ti ti-message-circle" :
@@ -109,18 +109,18 @@ export default function SocialTasksPage({
                   "ti ti-check"
                 } style={{ color: "#fff", fontSize: 15 }} />
               </div>
-              <div className="dash-tb">
-                <div className="dash-tt">{t.t}</div>
-                <div className="dash-td">{t.d}</div>
-                <div className="dash-tpg">
-                  <div className="dash-bar" style={{ flex: 1 }}>
-                    <div className="dash-bf" style={{ width: pctWidth }} />
+              <div className="tb">
+                <div className="tt">{t.t}</div>
+                <div className="td">{t.d}</div>
+                <div className="tpg">
+                  <div className="bar" style={{ flex: 1 }}>
+                    <div className="bf" style={{ width: pctWidth }} />
                   </div>
-                  <span className="dash-tpct">{pr}%</span>
+                  <span className="tpct">{pr}%</span>
                 </div>
               </div>
-              <div className="dash-tr-r">
-                <div className="dash-pts">+{t.pts} pts</div>
+              <div className="tr-r">
+                <div className="pts">+{t.pts} pts</div>
                 <span className={"pill " + pc}>{st === "done" ? <><i className="ti ti-check" />Done</> : st === "progress" ? <><i className="ti ti-clock" />Progress</> : <><i className="ti ti-sparkles" />New</>}</span>
                 {st !== "done" ? (
                   <button className={"btn " + (st === "progress" ? "bo" : "bg") + " bxs"} style={{ marginTop: 3, fontSize: 11 }} onClick={(e) => {e.stopPropagation(); onOpenTask(platformKey, id);}}>
@@ -160,25 +160,25 @@ function SocialDetail({ platformKey, id, SOC, socialState, PCOL, onAdvanceStep, 
   const pct = st === "done" ? 100 : Math.min(100, Math.round((step / total) * 100));
 
   return (
-    <div className="dash-card" style={{ marginTop: 14 }}>
-      <div className="dash-ch" style={{ marginBottom: 8 }}>
+    <div className="card" style={{ marginTop: 14 }}>
+      <div className="ch" style={{ marginBottom: 8 }}>
         <div>
-          <div className="dash-ct flexing-div">{t.t}</div>
-          <div className="dash-cs">{t.d}</div>
+          <div className="ct">{t.t}</div>
+          <div className="cs">{t.d}</div>
         </div>
-        <button className="btn dash-btn-muted dashboard-btn dash-bsm" onClick={onClose}>
+        <button className="btn bn bsm" onClick={onClose}>
           <i className="ti ti-arrow-left" /> Back
         </button>
       </div>
 
       <div style={{ display: "grid", gridTemplateColumns: "1.2fr 1fr", gap: 12 }}>
-        <div className="dash-card" style={{ background: "transparent" }}>
-          <div className="dash-ct flexing-div" style={{ marginBottom: 8 }}>Task Steps</div>
+        <div className="card" style={{ background: "transparent" }}>
+          <div className="ct" style={{ marginBottom: 8 }}>Task Steps</div>
           {t.s.map((s, i) => {
             const dn = i < step;
             const ac = i === step && st !== "done";
             return (
-              <div key={i} className="dash-step-i">
+              <div key={i} className="step-i">
                 <div className={"step-n " + (dn ? "sdn" : ac ? "sact" : "")}
                 >
                   {dn ? <i className="ti ti-check" style={{ fontSize: 10, color: "var(--gr)" }} /> : <span style={{ fontSize: 10, fontWeight: 700, color: ac ? "var(--glt)" : "var(--tx3)" }}>{i + 1}</span>}
@@ -196,7 +196,7 @@ function SocialDetail({ platformKey, id, SOC, socialState, PCOL, onAdvanceStep, 
                 <div style={{ fontSize: 11, color: "var(--tx3)", marginTop: 2 }}>+{t.pts} points have been added to your wallet</div>
               </div>
             ) : (
-              <button className="dash-D-btn dash-btn-fill dash-bfw  dashboard-btn" onClick={() => onAdvanceStep(id, total, platformKey)}>
+              <button className="D-btn bg bfw" onClick={() => onAdvanceStep(id, total, platformKey)}>
                 {step === 0 ? <><i className="ti ti-player-play" /> Start Task</> : step < total - 1 ? <><i className="ti ti-arrow-right" /> Complete Step {step + 1} & Continue</> : <><i className="ti ti-check" /> Submit & Claim +{t.pts} Points!</>}
               </button>
             )}
@@ -204,13 +204,13 @@ function SocialDetail({ platformKey, id, SOC, socialState, PCOL, onAdvanceStep, 
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-          <div className="dash-card" style={{ background: "transparent" }}>
-            <div className="dash-ct flexing-div" style={{ marginBottom: 8 }}>Your Progress</div>
+          <div className="card" style={{ background: "transparent" }}>
+            <div className="ct" style={{ marginBottom: 8 }}>Your Progress</div>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 7 }}>
               <div style={{ fontSize: 24, fontWeight: 800, color: "var(--glt)" }}>{pct}%</div>
               <div style={{ fontSize: 11, color: "var(--tx3)" }}>Step {Math.min(step + 1, total)} of {total}</div>
             </div>
-            <div className="dash-bar" style={{ height: 7, marginBottom: 10 }}>
+            <div className="bar" style={{ height: 7, marginBottom: 10 }}>
               <div
                 style={{
                   height: "100%",
@@ -221,24 +221,24 @@ function SocialDetail({ platformKey, id, SOC, socialState, PCOL, onAdvanceStep, 
                 }}
               />
             </div>
-            <div className="dash-g2" style={{ gap: 7 }}>
-              <div className="dash-mst">
-                <div className="dash-mv" style={{ color: "var(--gr)" }}>{step}</div>
-                <div className="dash-ml flex-text-icon">Steps Done</div>
+            <div className="g2" style={{ gap: 7 }}>
+              <div className="mst">
+                <div className="mv" style={{ color: "var(--gr)" }}>{step}</div>
+                <div className="ml">Steps Done</div>
               </div>
-              <div className="dash-mst">
-                <div className="dash-mv" style={{ color: "var(--am)" }}>{total - step}</div>
-                <div className="dash-ml flex-text-icon">Remaining</div>
+              <div className="mst">
+                <div className="mv" style={{ color: "var(--am)" }}>{total - step}</div>
+                <div className="ml">Remaining</div>
               </div>
             </div>
           </div>
 
-          <div className="dash-card" style={{ background: "transparent" }}>
-            <div className="dash-ct flexing-div" style={{ marginBottom: 8 }}>Task Info</div>
-            <div className="dash-fr flex-text-icon"><span className="dash-fk">Platform</span><span className="dash-fv">{platformKey.toUpperCase()}</span></div>
-            <div className="dash-fr flex-text-icon"><span className="dash-fk">Task Type</span><span className="dash-fv" style={{ textTransform: "capitalize" }}>{t.k}</span></div>
-            <div className="dash-fr flex-text-icon"><span className="dash-fk">Reward</span><span className="dash-fv" style={{ color: "var(--glt)", fontWeight: 700 }}>+{t.pts} pts</span></div>
-            <div className="dash-fr flex-text-icon"><span className="dash-fk">Status</span><span className={"pill " + (st === "done" ? "pd" : st === "progress" ? "pp" : "pn")}>{st === "done" ? "Done" : st === "progress" ? "In Progress" : "New"}</span></div>
+          <div className="card" style={{ background: "transparent" }}>
+            <div className="ct" style={{ marginBottom: 8 }}>Task Info</div>
+            <div className="fr"><span className="fk">Platform</span><span className="fv">{platformKey.toUpperCase()}</span></div>
+            <div className="fr"><span className="fk">Task Type</span><span className="fv" style={{ textTransform: "capitalize" }}>{t.k}</span></div>
+            <div className="fr"><span className="fk">Reward</span><span className="fv" style={{ color: "var(--glt)", fontWeight: 700 }}>+{t.pts} pts</span></div>
+            <div className="fr"><span className="fk">Status</span><span className={"pill " + (st === "done" ? "pd" : st === "progress" ? "pp" : "pn")}>{st === "done" ? "Done" : st === "progress" ? "In Progress" : "New"}</span></div>
           </div>
         </div>
       </div>
