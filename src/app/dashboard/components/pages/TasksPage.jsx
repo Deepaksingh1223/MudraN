@@ -1,328 +1,160 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-  Filler
-} from 'chart.js';
-import { Line } from 'react-chartjs-2';
-import { 
-  IoFlash, 
-  IoWallet, 
-  IoTrendingUp, 
-  IoStar, 
-  IoGift, 
-  IoTime, 
-  IoCheckmarkCircle, 
-  IoInfinite, 
-  IoPeople 
-} from "react-icons/io5";
-import { MdEmojiEvents, MdMilitaryTech, MdVerified, MdPending } from "react-icons/md";
-import { FaChartLine, FaCoins, FaGem } from "react-icons/fa";
-import { GiDiamondRing, GiProgression } from "react-icons/gi";
-
-// Register ChartJS components
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-  Filler
-);
 
 export default function TasksPage({ onGo, onToast }) {
-  const [chartData, setChartData] = useState(null);
-
-  useEffect(() => {
-    // Sample earnings data for the last 7 days
-    const labels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-    const earnings = [120, 85, 145, 95, 180, 220, 175];
-    const cumulativeEarnings = [120, 205, 350, 445, 625, 845, 1020];
-
-    setChartData({
-      labels: labels,
-      datasets: [
-        {
-          label: 'Daily Earnings',
-          data: earnings,
-          borderColor: 'rgb(34, 197, 94)',
-          backgroundColor: 'rgba(34, 197, 94, 0.1)',
-          borderWidth: 2,
-          tension: 0.4,
-          pointBackgroundColor: 'rgb(34, 197, 94)',
-          pointBorderColor: '#fff',
-          pointBorderWidth: 2,
-          pointRadius: 4,
-          pointHoverRadius: 6,
-          fill: true,
-          yAxisID: 'y',
-        },
-        {
-          label: 'Cumulative Points',
-          data: cumulativeEarnings,
-          borderColor: 'rgb(59, 130, 246)',
-          backgroundColor: 'rgba(59, 130, 246, 0.05)',
-          borderWidth: 2,
-          borderDash: [5, 5],
-          tension: 0.4,
-          pointBackgroundColor: 'rgb(59, 130, 246)',
-          pointBorderColor: '#fff',
-          pointBorderWidth: 2,
-          pointRadius: 3,
-          pointHoverRadius: 5,
-          fill: false,
-          yAxisID: 'y1',
-        }
-      ]
-    });
-  }, []);
-
-  const options = {
-    responsive: true,
-    maintainAspectRatio: false,
-    interaction: {
-      mode: 'index',
-      intersect: false,
-    },
-    plugins: {
-      legend: {
-        position: 'top',
-        align: 'end',
-        labels: {
-          usePointStyle: true,
-          boxWidth: 8,
-          font: {
-            size: 11,
-            weight: '500'
-          },
-          padding: 15
-        }
-      },
-      tooltip: {
-        backgroundColor: 'rgba(0, 0, 0, 0.8)',
-        titleColor: '#fff',
-        bodyColor: '#e5e5e5',
-        borderColor: 'rgba(34, 197, 94, 0.3)',
-        borderWidth: 1,
-        padding: 10,
-        displayColors: true,
-        callbacks: {
-          label: function(context) {
-            let label = context.dataset.label || '';
-            if (label) {
-              label += ': ';
-            }
-            if (context.parsed.y !== null) {
-              label += context.parsed.y + ' pts';
-            }
-            return label;
-          }
-        }
-      }
-    },
-    scales: {
-      y: {
-        type: 'linear',
-        display: true,
-        position: 'left',
-        title: {
-          display: true,
-          text: 'Daily Points',
-          color: 'var(--vi-text2)',
-          font: {
-            size: 10,
-            weight: '500'
-          }
-        },
-        grid: {
-          color: 'rgba(0, 0, 0, 0.05)',
-          drawBorder: false,
-        },
-        ticks: {
-          stepSize: 50,
-          callback: function(value) {
-            return value + ' pts';
-          },
-          font: {
-            size: 10
-          }
-        }
-      },
-      y1: {
-        type: 'linear',
-        display: true,
-        position: 'right',
-        title: {
-          display: true,
-          text: 'Cumulative Points',
-          color: 'var(--vi-text2)',
-          font: {
-            size: 10,
-            weight: '500'
-          }
-        },
-        grid: {
-          drawOnChartArea: false,
-        },
-        ticks: {
-          stepSize: 250,
-          callback: function(value) {
-            return value + ' pts';
-          },
-          font: {
-            size: 10
-          }
-        }
-      },
-      x: {
-        grid: {
-          display: false,
-        },
-        ticks: {
-          font: {
-            size: 11,
-            weight: '500'
-          }
-        }
-      }
-    },
-    elements: {
-      line: {
-        borderJoin: 'round',
-      },
-      point: {
-        hoverBorderWidth: 3,
-      }
-    }
-  };
-
   return (
-    <div className="dash-pad">
-      <div className="dash-bc">
+    <div className="pad">
+         
+ 
+<div className="bc">
         <span onClick={() => onGo("home")}>Dashboard</span>
         <span>›</span>
-        <span className="dash-cur">Rewards Wallet</span> 
+     <span className="cur">Loyalty Tasks</span> 
+          <div className="sub">Complete tasks across platforms to earn MDR points</div>
       </div>
 
-      <div >
-        <div className="dash-vi-wallet-card">
-          <div className="dash-vi-wallet-vip">
-            <IoFlash style={{ marginRight: "6px", color: "#ffd700" }} />
-            EMERALD
-            <FaGem style={{ marginLeft: "6px", color: "#50c878" }} />
-          </div>
-          <div className="dash-vi-wallet-label">
-            <IoWallet style={{ marginRight: "6px" }} />
-            TOTAL REWARD POINTS
-          </div>
-          <div className="dash-vi-wallet-balance">4,820</div>
-          <div className="dash-vi-wallet-pts">
-            <FaCoins style={{ marginRight: "4px" }} />
-            ≈ $48.20 USDT value · Updated just now
-          </div>
-          <div className="dash-vi-wallet-row">
-            <div className="dash-vi-wallet-mini">
-              <div className="dash-vi-wallet-mini-label">
-                <MdPending style={{ marginRight: "4px", fontSize: "12px" }} />
-                Pending
-              </div>
-              <div className="dash-vi-wallet-mini-val">215</div>
-            </div>
-            <div className="dash-vi-wallet-mini">
-              <div className="dash-vi-wallet-mini-label">
-                <MdVerified style={{ marginRight: "4px", fontSize: "12px", color: "#22c55e" }} />
-                Approved
-              </div>
-              <div className="dash-vi-wallet-mini-val">4,605</div>
-            </div>
-            <div className="dash-vi-wallet-mini">
-              <div className="dash-vi-wallet-mini-label">
-                <IoInfinite style={{ marginRight: "4px", fontSize: "12px" }} />
-                Lifetime
-              </div>
-              <div className="dash-vi-wallet-mini-val">8,340</div>
-            </div>
-            <div className="dash-vi-wallet-mini">
-              <div className="dash-vi-wallet-mini-label">
-                <IoPeople style={{ marginRight: "4px", fontSize: "12px" }} />
-                Referrals
-              </div>
-              <div className="dash-vi-wallet-mini-val">340</div>
+      <div className="g3">
+        <div className="st">
+          <div className="st-hd">
+            <div className="st-lbl">Completed</div>
+            <div className="st-ico" style={{ background: "var(--grbg)" }}>
+              <i className="ti ti-circle-check" style={{ color: "var(--gr)" }} aria-hidden="true" />
             </div>
           </div>
+          <div className="st-val" style={{ color: "var(--gr)" }}>14</div>
+          <div style={{ fontSize: 11, color: "var(--tx3)" }}>of 22 tasks</div>
         </div>
-
-        <div className="dash-vi-stats-grid" style={{ gridTemplateColumns: "repeat(3, 1fr)" }}>
-          <div className="dash-vi-stat-card">
-            <div className="dash-vi-stat-label">
-              <IoTrendingUp style={{ marginRight: "6px", color: "#10b981" }} />
-              Bonus Earnings
-            </div>
-            <div className="dash-vi-stat-value">520</div>
-            <div className="dash-vi-stat-change">
-              <IoStar style={{ marginRight: "4px", fontSize: "10px", color: "#fbbf24" }} />
-              VIP bonus points
+        <div className="st">
+          <div className="st-hd">
+            <div className="st-lbl">In Progress</div>
+            <div className="st-ico" style={{ background: "var(--pubg)" }}>
+              <i className="ti ti-loader" style={{ color: "var(--pu)" }} aria-hidden="true" />
             </div>
           </div>
-          <div className="dash-vi-stat-card">
-            <div className="dash-vi-stat-label">
-              <GiDiamondRing style={{ marginRight: "6px", color: "#8b5cf6" }} />
-              Staking Bonus
-            </div>
-            <div className="dash-vi-stat-value">180</div>
-            <div className="dash-vi-stat-change">
-              <MdMilitaryTech style={{ marginRight: "4px", fontSize: "10px" }} />
-              Emerald tier perk
-            </div>
-          </div>
-          <div className="dash-vi-stat-card">
-            <div className="dash-vi-stat-label">
-              <IoGift style={{ marginRight: "6px", color: "#ef4444" }} />
-              Redeemed
-            </div>
-            <div className="dash-vi-stat-value">3,520</div>
-            <div className="dash-vi-stat-change" style={{ color: "var(--vi-text3)" }}>
-              <IoTime style={{ marginRight: "4px", fontSize: "10px" }} />
-              All time
-            </div>
-          </div>
+          <div className="st-val" style={{ color: "var(--pu)" }}>3</div>
+          <div style={{ fontSize: 11, color: "var(--tx3)" }}>ongoing tasks</div>
         </div>
-
-        <div className="dash-vi-card">
-          <div className="dash-vi-card-header">
-            <div className="dash-vi-card-title">
-              <FaChartLine style={{ marginRight: "8px", color: "#3b82f6" }} />
-              Earnings History
+        <div className="st">
+          <div className="st-hd">
+            <div className="st-lbl">Points Earned</div>
+            <div className="st-ico" style={{ background: "var(--gdim)" }}>
+              <i className="ti ti-star" style={{ color: "var(--glt)" }} aria-hidden="true" />
             </div>
           </div>
-          <div style={{ padding: "20px", height: "380px" }}>
-            {chartData ? (
-              <Line data={chartData} options={options} />
-            ) : (
-              <div style={{ 
-                display: "flex", 
-                justifyContent: "center", 
-                alignItems: "center", 
-                height: "100%",
-                color: "var(--vi-text3)"
-              }}>
-                Loading chart data...
+          <div className="st-val" style={{ color: "var(--glt)" }}>4,820</div>
+          <div style={{ fontSize: 11, color: "var(--tx3)" }}>this month</div>
+        </div>
+      </div>
+
+      <div className="card">
+        <div className="ch">
+          <div className="ct">Select Platform</div>
+        </div>
+        <div className="g5">
+          <Link href="/dashboard/youtube">
+          <div className="plat hot" onClick={() => onGo("yt")}>
+            <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
+              <div style={{ width: 32, height: 32, borderRadius: 7, background: "#FF0000", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="white">
+                  <path d="M23 7s-.3-2-1.2-2.8c-1.1-1.2-2.4-1.2-3-1.3C16.2 2.8 12 2.8 12 2.8s-4.2 0-6.8.1c-.6.1-1.9.1-3 1.3C1.3 5 1 7 1 7S.7 9.1.7 11.2v2c0 2 .3 4.2.3 4.2s.3 2 1.2 2.8c1.1 1.2 2.6 1.1 3.3 1.2C7.3 21.5 12 21.5 12 21.5s4.2 0 6.8-.2c.6-.1 1.9-.1 3-1.2.9-.8 1.2-2.8 1.2-2.8s.3-2.1.3-4.2v-2C23.3 9.1 23 7 23 7zM9.7 15.5V8.4l6.5 3.6-6.5 3.5z" />
+                </svg>
               </div>
-            )}
+              <div>
+                <div style={{ fontSize: 12, fontWeight: 600, color: "var(--tx)" }}>YouTube</div>
+                <div style={{ fontSize: 10, color: "var(--tx3)" }}>6 tasks</div>
+              </div>
+            </div>
+            <div className="bar">
+              <div className="bf" style={{ width: "67%" }} />
+            </div>
+            <div style={{ display: "flex", justifyContent: "space-between", fontSize: 10, color: "var(--tx3)", fontWeight: 600, marginTop: 4 }}>
+              <span>4/6 done</span>
+              <span style={{ color: "var(--glt)" }}>+79 pts</span>
+            </div>
           </div>
+</Link>
+      <Link href="/dashboard/Facebook">
+          <div className="plat" onClick={() => onGo("fb")}>
+            <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
+              <div style={{ width: 32, height: 32, borderRadius: 7, background: "#1877F2", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 15, fontWeight: 700, color: "#fff" }}>f</div>
+              <div>
+                <div style={{ fontSize: 12, fontWeight: 600, color: "var(--tx)" }}>Facebook</div>
+                <div style={{ fontSize: 10, color: "var(--tx3)" }}>6 tasks</div>
+              </div>
+            </div>
+            <div className="bar">
+              <div className="bf" style={{ width: "33%" }} />
+            </div>
+            <div style={{ display: "flex", justifyContent: "space-between", fontSize: 10, color: "var(--tx3)", fontWeight: 600, marginTop: 4 }}>
+              <span>2/6 done</span>
+              <span style={{ color: "var(--glt)" }}>+10 pts</span>
+            </div>
+          </div>
+</Link>
+  <Link href="/dashboard/Instagram">
+          <div className="plat" onClick={() => onGo("ig")}>
+            <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
+              <div style={{ width: 32, height: 32, borderRadius: 7, background: "linear-gradient(135deg,#f58529,#dd2a7b)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                  <rect x="2" y="2" width="20" height="20" rx="5" stroke="white" strokeWidth="2.2" />
+                  <circle cx="12" cy="12" r="4" stroke="white" strokeWidth="2" />
+                  <circle cx="17.5" cy="6.5" r="1.4" fill="white" />
+                </svg>
+              </div>
+              <div>
+                <div style={{ fontSize: 12, fontWeight: 600, color: "var(--tx)" }}>Instagram</div>
+                <div style={{ fontSize: 10, color: "var(--tx3)" }}>5 tasks</div>
+              </div>
+            </div>
+            <div className="bar">
+              <div className="bf" style={{ width: "40%" }} />
+            </div>
+            <div style={{ display: "flex", justifyContent: "space-between", fontSize: 10, color: "var(--tx3)", fontWeight: 600, marginTop: 4 }}>
+              <span>2/5 done</span>
+              <span style={{ color: "var(--glt)" }}>+15 pts</span>
+            </div>
+          </div>
+</Link>
+  <Link href="/dashboard/Twitter">
+          <div className="plat" onClick={() => onGo("tw")}>
+            <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
+              <div style={{ width: 32, height: 32, borderRadius: 7, background: "#1DA1F2", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 700, color: "#fff" }}>𝑂</div>
+              <div>
+                <div style={{ fontSize: 12, fontWeight: 600, color: "var(--tx)" }}>X / Twitter</div>
+                <div style={{ fontSize: 10, color: "var(--tx3)" }}>5 tasks</div>
+              </div>
+            </div>
+            <div className="bar">
+              <div className="bf" style={{ width: "40%" }} />
+            </div>
+            <div style={{ display: "flex", justifyContent: "space-between", fontSize: 10, color: "var(--tx3)", fontWeight: 600, marginTop: 4 }}>
+              <span>2/5 done</span>
+              <span style={{ color: "var(--glt)" }}>+18 pts</span>
+            </div>
+          </div>
+</Link>
+  <Link href="/dashboard/LinkedIn">
+          <div className="plat" onClick={() => onGo("li")}>
+            <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
+              <div style={{ width: 32, height: 32, borderRadius: 7, background: "#0077B5", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 10, fontWeight: 700, color: "#fff" }}>in</div>
+              <div>
+                <div style={{ fontSize: 12, fontWeight: 600, color: "var(--tx)" }}>LinkedIn</div>
+                <div style={{ fontSize: 10, color: "var(--tx3)" }}>4 tasks</div>
+              </div>
+            </div>
+            <div className="bar">
+              <div className="bf" style={{ width: "25%" }} />
+            </div>
+            <div style={{ display: "flex", justifyContent: "space-between", fontSize: 10, color: "var(--tx3)", fontWeight: 600, marginTop: 4 }}>
+              <span>1/4 done</span>
+              <span style={{ color: "var(--glt)" }}>+10 pts</span>
+            </div>
+          </div>
+          </Link>
         </div>
       </div>
     </div>
   );
 }
+

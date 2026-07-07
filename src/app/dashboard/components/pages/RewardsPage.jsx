@@ -1,180 +1,108 @@
 "use client";
 
-import { FaTrophy, FaMoneyBillWave, FaCreditCard, FaCrown, FaBolt, FaShoppingCart } from "react-icons/fa";
-import { GiToken, GiUpgrade } from "react-icons/gi";
-import { MdPayment, MdDiscount } from "react-icons/md";
-import { SiVeltt } from "react-icons/si";
-import { IoMdRocket } from "react-icons/io";
-
 export default function RewardsPage({ onGo, onToast }) {
-  const handleRedeem = (rewardName, minPoints, requiredPoints) => {
-    const currentPoints = 4820;
-    
-    if (currentPoints < minPoints) {
-      onToast?.({
-        type: "error",
-        message: `Insufficient points! You need at least ${minPoints} points to redeem ${rewardName}.`
-      });
-      return;
-    }
-    
-    onToast?.({
-      type: "success",
-      message: `Redeemed ${rewardName} successfully!`
-    });
-    
-    // You can add additional logic here like API calls
-    console.log(`Redeeming ${rewardName} with ${requiredPoints} points`);
-  };
-
-  const handleViewDetails = () => {
-    onToast?.({
-      type: "info",
-      message: "VIP upgrade details: 2,000 points = 1 tier up (Bronze → Silver → Gold → Emerald → Diamond)"
-    });
-  };
-
   return (
-    <div className="dash-pad">
-      <div className="dash-bc">
+    <div className="pad">
+      <div className="bc">
         <span onClick={() => onGo("home")}>Dashboard</span>
         <span>›</span>
-        <span className="dash-cur">Redeem Rewards</span>
+        <span className="cur">Rewards Wallet</span>
       </div>
-      <div className="dash-h1">
-        <FaMoneyBillWave style={{ marginRight: "12px", color: "#fbbf24" }} />
-        Balance: 4,820 pts · Redeem for tokens, USDT & more
-      </div>
+      <div className="h1">Rewards Wallet</div>
 
-      <div >
-        <div className="dash-vi-redeem-grid">
-          {/* Velt Impera Token */}
-          <div className="dash-vi-redeem-card text-center">
-            <div className="dash-vi-redeem-icon">
-              <GiToken style={{ fontSize: "32px", color: "#8b5cf6" }} />
+      <div className="g2">
+        <div className="card">
+          <div className="ch">
+            <div className="ct">Points Balance</div>
+          </div>
+          <div className="pc">
+            <svg width="130" height="130" viewBox="0 0 130 130">
+              <circle cx="65" cy="65" r="54" fill="none" stroke="var(--sf3)" strokeWidth="10" />
+              <circle
+                cx="65"
+                cy="65"
+                r="54"
+                fill="none"
+                stroke="url(#rg1)"
+                strokeWidth="10"
+                strokeDasharray="238 339"
+                strokeLinecap="round"
+                transform="rotate(-90 65 65)"
+              />
+              <defs>
+                <linearGradient id="rg1">
+                  <stop offset="0%" stopColor="#9A7020" />
+                  <stop offset="100%" stopColor="#C9A03A" />
+                </linearGradient>
+              </defs>
+              <text x="65" y="59" textAnchor="middle" fill="var(--tx)" fontSize="21" fontWeight="700" fontFamily="Outfit,sans-serif">
+                4,820
+              </text>
+              <text x="65" y="73" textAnchor="middle" fill="var(--tx3)" fontSize="9" fontFamily="Outfit,sans-serif" letterSpacing="1">
+                POINTS
+              </text>
+              <text x="65" y="86" textAnchor="middle" fill="var(--glt)" fontSize="9" fontFamily="Outfit,sans-serif">
+                ≈ $96.40 USDT
+              </text>
+            </svg>
+          </div>
+          <div className="g3" style={{ gap: 7, marginBottom: 12 }}>
+            <div className="mst">
+              <div className="mv">$96.40</div>
+              <div className="ml">USDT Value</div>
             </div>
-            <div className="dash-vi-redeem-name">
-              <GiToken style={{ marginRight: "6px", fontSize: "14px" }} />
-              Velt Impera Token
+            <div className="mst">
+              <div className="mv">2,400</div>
+              <div className="ml">For MDR</div>
             </div>
-            <div className="dash-vi-redeem-pts">Min 500 pts required</div>
-            <div className="dash-vi-redeem-rate">100 pts = 1 VIMP</div>
-            <button 
-              className="dash-vi-btn dash-vi-btn-primary" 
-              style={{ width: "100%" }}
-              onClick={() => handleRedeem("Velt Impera Token", 500, 500)}
+            <div className="mst">
+              <div className="mv">1,200</div>
+              <div className="ml">For Plan</div>
+            </div>
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+            <button className="D-btn bg bfw" onClick={() => onToast("Redeem flow opened!")}
             >
-              <GiToken style={{ marginRight: "6px" }} />
-              Redeem Now
+              <i className="ti ti-star" />Redeem Now
+            </button>
+            <button className="btn bo bfw" onClick={() => onGo("mdr")}>
+              <i className="ti ti-coin" />Convert to MDR Tokens
+            </button>
+            <button className="btn bn bfw" onClick={() => onToast("Withdrawal form opened")}>
+              <i className="ti ti-download" />Withdraw as USDT
             </button>
           </div>
+        </div>
 
-          {/* USDT Payout */}
-          <div className="dash-vi-redeem-card text-center">
-            <div className="dash-vi-redeem-icon">
-              <FaMoneyBillWave style={{ fontSize: "32px", color: "#10b981" }} />
-            </div>
-            <div className="dash-vi-redeem-name">
-              <FaMoneyBillWave style={{ marginRight: "6px", fontSize: "14px" }} />
-              USDT Payout
-            </div>
-            <div className="dash-vi-redeem-pts">Min 1,000 pts required</div>
-            <div className="dash-vi-redeem-rate">100 pts = $1.00</div>
-            <button 
-              className="dash-vi-btn dash-vi-btn-primary" 
-              style={{ width: "100%" }}
-              onClick={() => handleRedeem("USDT Payout", 1000, 1000)}
-            >
-              <FaMoneyBillWave style={{ marginRight: "6px" }} />
-              Redeem Now
-            </button>
+        <div className="card">
+          <div className="ch">
+            <div className="ct">Earnings History</div>
           </div>
-
-          {/* Debit Card Discount */}
-          <div className="dash-vi-redeem-card text-center">
-            <div className="dash-vi-redeem-icon">
-              <FaCreditCard style={{ fontSize: "32px", color: "#ef4444" }} />
-            </div>
-            <div className="dash-vi-redeem-name">
-              <FaCreditCard style={{ marginRight: "6px", fontSize: "14px" }} />
-              Debit Card Discount
-            </div>
-            <div className="dash-vi-redeem-pts">Min 200 pts required</div>
-            <div className="dash-vi-redeem-rate">200 pts = 10% off</div>
-            <button 
-              className="dash-vi-btn dash-vi-btn-primary" 
-              style={{ width: "100%" }}
-              onClick={() => handleRedeem("Debit Card Discount", 200, 200)}
-            >
-              <MdDiscount style={{ marginRight: "6px" }} />
-              Redeem Now
-            </button>
-          </div>
-
-          {/* VIP Upgrade */}
-          <div className="dash-vi-redeem-card text-center">
-            <div className="dash-vi-redeem-icon">
-              <FaCrown style={{ fontSize: "32px", color: "#fbbf24" }} />
-            </div>
-            <div className="dash-vi-redeem-name">
-              <FaCrown style={{ marginRight: "6px", fontSize: "14px" }} />
-              VIP Upgrade
-            </div>
-            <div className="dash-vi-redeem-pts">Min 2,000 pts required</div>
-            <div className="dash-vi-redeem-rate">2,000 pts = 1 tier up</div>
-            <button 
-              className="dash-vi-btn dash-vi-btn-ghost" 
-              style={{ width: "100%", border: "1px solid var(--vi-border)" }}
-              onClick={handleViewDetails}
-            >
-              <GiUpgrade style={{ marginRight: "6px" }} />
-              View Details
-            </button>
-          </div>
-
-          {/* Staking Booster */}
-          <div className="dash-vi-redeem-card text-center">
-            <div className="dash-vi-redeem-icon">
-              <FaBolt style={{ fontSize: "32px", color: "#eab308" }} />
-            </div>
-            <div className="dash-vi-redeem-name">
-              <FaBolt style={{ marginRight: "6px", fontSize: "14px" }} />
-              Staking Booster
-            </div>
-            <div className="dash-vi-redeem-pts">Min 300 pts required</div>
-            <div className="dash-vi-redeem-rate">300 pts = 2x boost / 7d</div>
-            <button 
-              className="dash-vi-btn dash-vi-btn-primary" 
-              style={{ width: "100%" }}
-              onClick={() => handleRedeem("Staking Booster", 300, 300)}
-            >
-              <IoMdRocket style={{ marginRight: "6px" }} />
-              Redeem Now
-            </button>
-          </div>
-
-          {/* Marketplace Credits */}
-          <div className="dash-vi-redeem-card text-center">
-            <div className="dash-vi-redeem-icon">
-              <FaShoppingCart style={{ fontSize: "32px", color: "#3b82f6" }} />
-            </div>
-            <div className="dash-vi-redeem-name">
-              <FaShoppingCart style={{ marginRight: "6px", fontSize: "14px" }} />
-              Marketplace Credits
-            </div>
-            <div className="dash-vi-redeem-pts">Min 150 pts required</div>
-            <div className="dash-vi-redeem-rate">100 pts = $0.80 credit</div>
-            <button 
-              className="dash-vi-btn dash-vi-btn-primary" 
-              style={{ width: "100%" }}
-              onClick={() => handleRedeem("Marketplace Credits", 150, 150)}
-            >
-              <MdPayment style={{ marginRight: "6px" }} />
-              Redeem Now
-            </button>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            {[
+              ["Nov", "+1,240", "var(--tx2)"],
+              ["Dec", "+1,820", "var(--tx)"],
+              ["Feb", "+2,140", "var(--tx)"],
+              ["Mar", "+2,450", "var(--tx)"],
+              ["Apr", "+1,670", "var(--glt)"],
+            ].map(([m, pts, color], idx) => {
+              const w = [42, 61, 72, 82, 56][idx];
+              return (
+                <div key={m} style={{ display: "flex", alignItems: "center", gap: 9, padding: "7px 0", borderBottom: idx < 4 ? "1px solid var(--bd)" : undefined }}>
+                  <span style={{ fontSize: 12, color: "var(--tx2)", width: 32 }}>{m}</span>
+                  <div style={{ flex: 1 }}>
+                    <div className="bar">
+                      <div className="bf" style={{ width: w + "%" }} />
+                    </div>
+                  </div>
+                  <span style={{ fontSize: 12, color, fontWeight: 500, minWidth: 46, textAlign: "right" }}>{pts}</span>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
     </div>
   );
 }
+

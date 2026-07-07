@@ -1,18 +1,7 @@
 "use client";
 
+import "../mudra-dashboard.css";
 import { useState } from "react";
-import { 
-  UserPlus, 
-  Heart, 
-  Share2, 
-  ArrowLeft, 
-  CheckCircle, 
-  Star, 
-  Gift,
-  Sparkles,
-  Clock
-} from "lucide-react";
-import { CiInstagram } from "react-icons/ci";
 
 export default function InstagramTask() {
   const [showDetail, setShowDetail] = useState(false);
@@ -20,9 +9,9 @@ export default function InstagramTask() {
   
   // Tasks data with progress
   const [tasks, setTasks] = useState({
-    ig1: { title: "Follow @MUDRAFinance", description: "Follow the official MUDRA Instagram", points: 10, progress: 100, status: "done", type: "follow", stepsDone: 1, totalSteps: 1 },
+    ig1: { title: "Follow @MudraFinance", description: "Follow the official Mudra Instagram", points: 10, progress: 100, status: "done", type: "follow", stepsDone: 1, totalSteps: 1 },
     ig2: { title: "Like: Platform Launch Reel", description: "Like our launch reel", points: 5, progress: 100, status: "done", type: "like", stepsDone: 1, totalSteps: 1 },
-    ig3: { title: "Like: Velt Impera Infographic", description: "Like our Velt Impera explainer post", points: 5, progress: 0, status: "new", type: "like", stepsDone: 0, totalSteps: 1 },
+    ig3: { title: "Like: MDR Token Infographic", description: "Like our MDR token explainer post", points: 5, progress: 0, status: "new", type: "like", stepsDone: 0, totalSteps: 1 },
     ig4: { title: "Share Story: Referral Code", description: "Share our referral template to your story", points: 12, progress: 50, status: "progress", type: "story", stepsDone: 1, totalSteps: 2 },
     ig5: { title: "Like: Rewards Feature Reel", description: "Like the rewards wallet highlight reel", points: 5, progress: 0, status: "new", type: "like", stepsDone: 0, totalSteps: 1 }
   });
@@ -102,13 +91,13 @@ export default function InstagramTask() {
   const getIcon = (type) => {
     switch(type) {
       case "follow":
-        return <UserPlus className="text-[15px] text-white" aria-hidden="true" size={15} />;
+        return <i className="ti ti-user-plus" style={{fontSize:"15px", color:"#fff"}} aria-hidden="true"></i>;
       case "like":
-        return <Heart className="text-[15px] text-white" aria-hidden="true" size={15} />;
+        return <i className="ti ti-heart" style={{fontSize:"15px", color:"#fff"}} aria-hidden="true"></i>;
       case "story":
-        return <Share2 className="text-[15px] text-white" aria-hidden="true" size={15} />;
+        return <i className="ti ti-share-2" style={{fontSize:"15px", color:"#fff"}} aria-hidden="true"></i>;
       default:
-        return <Heart className="text-[15px] text-white" aria-hidden="true" size={15} />;
+        return <i className="ti ti-heart" style={{fontSize:"15px", color:"#fff"}} aria-hidden="true"></i>;
     }
   };
 
@@ -118,14 +107,14 @@ export default function InstagramTask() {
     
     return (
       <div id="ig-detail" style={{display: "block", marginTop: "20px"}}>
-        <div className="flex items-center gap-[9px] mb-[12px] flex-wrap">
-          <button className="inline-flex items-center gap-2 px-3 py-1.5 text-sm rounded-md bg-transparent text-white" onClick={closeSoc}>
-            <ArrowLeft size={16} />Back
+        <div style={{display:"flex", alignItems:"center", gap:"9px", marginBottom:"12px", flexWrap:"wrap"}}>
+          <button className="btn bn bsm" onClick={closeSoc}>
+            <i className="ti ti-arrow-left"></i>Back
           </button>
           <div style={{fontSize:"13px", fontWeight:"600", color:"var(--tx)", flex:1, minWidth:0, overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap"}}>
             {selectedTask.title}
           </div>
-          <div className="dash-pts" style={{flexShrink:0}}>+{selectedTask.points} pts</div>
+          <div className="pts" style={{flexShrink:0}}>+{selectedTask.points} pts</div>
         </div>
         
         <div style={{
@@ -133,11 +122,11 @@ export default function InstagramTask() {
           gridTemplateColumns: "1.2fr 1fr", 
           gap:"12px"
         }}>
-          <div className="dash-card">
+          <div className="card">
             <div style={{fontSize:"12px", fontWeight:"600", color:"var(--tx)", marginBottom:"10px"}}>Task Steps</div>
             
             {/* Step 1 */}
-            <div className="dash-step-i" style={{display:"flex", alignItems:"flex-start", gap:"10px", marginBottom: "15px"}}>
+            <div className="step-i" style={{display:"flex", alignItems:"flex-start", gap:"10px", marginBottom: "15px"}}>
               <div style={{
                 width: "24px",
                 height: "24px",
@@ -149,7 +138,7 @@ export default function InstagramTask() {
                 flexShrink: 0
               }}>
                 {selectedTask.stepsDone > 0 ? (
-                  <CheckCircle style={{fontSize:"12px", color:"#fff"}} size={12} />
+                  <i className="ti ti-check" style={{fontSize:"12px", color:"#fff"}}></i>
                 ) : (
                   <span style={{fontSize:"11px", color: selectedTask.stepsDone === 0 ? "#fff" : "var(--tx3)"}}>1</span>
                 )}
@@ -160,13 +149,14 @@ export default function InstagramTask() {
                   fontWeight: selectedTask.stepsDone === 0 ? "600" : "normal",
                   color: selectedTask.stepsDone > 0 ? "var(--tx2)" : "var(--tx)"
                 }}>
-                  {selectedTask.type === "follow" && "Search and follow @MUDRAFinance on Instagram"}
+                  {selectedTask.type === "follow" && "Search and follow @MudraFinance on Instagram"}
                   {selectedTask.type === "like" && "Find the post and double-tap to like"}
                   {selectedTask.type === "story" && "Open the story template from our highlights"}
                 </div>
                 {selectedTask.stepsDone === 0 && (
                   <button 
-                    className="mt-2 px-3 py-1.5 text-[11px] rounded-md font-semibold bg-gradient-to-r from-orange-400 to-pink-500 text-white"
+                    className="btn bg bsm" 
+                    style={{marginTop: "8px", fontSize: "11px"}}
                     onClick={() => completeStep(0)}
                   >
                     Complete Step 1
@@ -174,7 +164,7 @@ export default function InstagramTask() {
                 )}
                 {selectedTask.stepsDone > 0 && (
                   <div style={{fontSize: "11px", color: "var(--gr)", marginTop: "4px"}}>
-                    <CheckCircle className="inline mr-1" size={11} /> Step completed
+                    ✓ Step completed
                   </div>
                 )}
               </div>
@@ -182,7 +172,7 @@ export default function InstagramTask() {
             
             {/* Step 2 - Only for story type */}
             {selectedTask.type === "story" && selectedTask.totalSteps >= 2 && (
-              <div className="dash-step-i" style={{display:"flex", alignItems:"flex-start", gap:"10px", marginBottom: "15px"}}>
+              <div className="step-i" style={{display:"flex", alignItems:"flex-start", gap:"10px", marginBottom: "15px"}}>
                 <div style={{
                   width: "24px",
                   height: "24px",
@@ -194,7 +184,7 @@ export default function InstagramTask() {
                   flexShrink: 0
                 }}>
                   {selectedTask.stepsDone > 1 ? (
-                    <CheckCircle style={{fontSize:"12px", color:"#fff"}} size={12} />
+                    <i className="ti ti-check" style={{fontSize:"12px", color:"#fff"}}></i>
                   ) : (
                     <span style={{fontSize:"11px", color: selectedTask.stepsDone === 1 ? "#fff" : "var(--tx3)"}}>2</span>
                   )}
@@ -209,7 +199,8 @@ export default function InstagramTask() {
                   </div>
                   {selectedTask.stepsDone === 1 && (
                     <button 
-                      className="mt-2 px-3 py-1.5 text-[11px] rounded-md font-semibold bg-gradient-to-r from-orange-400 to-pink-500 text-white"
+                      className="btn bg bsm" 
+                      style={{marginTop: "8px", fontSize: "11px"}}
                       onClick={() => completeStep(1)}
                     >
                       Complete Step 2
@@ -217,7 +208,7 @@ export default function InstagramTask() {
                   )}
                   {selectedTask.stepsDone > 1 && (
                     <div style={{fontSize: "11px", color: "var(--gr)", marginTop: "4px"}}>
-                      <CheckCircle className="inline mr-1" size={11} /> Step completed
+                      ✓ Step completed
                     </div>
                   )}
                 </div>
@@ -228,7 +219,7 @@ export default function InstagramTask() {
             {selectedTask.stepsDone === selectedTask.totalSteps && (
               <div style={{marginTop:"12px"}}>
                 <div style={{background:"var(--grbg)", border:"1px solid var(--grd)", borderRadius:"9px", padding:"13px", textAlign:"center"}}>
-                  <CheckCircle style={{fontSize:"26px", color:"var(--gr)", display:"block", marginBottom:"5px"}} size={26} />
+                  <i className="ti ti-circle-check" style={{fontSize:"26px", color:"var(--gr)", display:"block", marginBottom:"5px"}} aria-hidden="true"></i>
                   <div style={{fontSize:"13px", fontWeight:"600", color:"var(--gr)"}}>Task Completed!</div>
                   <div style={{fontSize:"11px", color:"var(--tx3)", marginTop:"2px"}}>+{selectedTask.points} points are ready to claim!</div>
                 </div>
@@ -237,7 +228,7 @@ export default function InstagramTask() {
           </div>
           
           <div style={{display:"flex", flexDirection:"column", gap:"10px"}}>
-            <div className="dash-card">
+            <div className="card">
               <div style={{fontSize:"12px", fontWeight:"600", color:"var(--tx)", marginBottom:"9px"}}>Your Progress</div>
               <div style={{display:"flex", justifyContent:"space-between", alignItems:"baseline", marginBottom:"7px", flexWrap:"wrap", gap:"5px"}}>
                 <div style={{fontSize:"24px", fontWeight:"800", color:"var(--glt)"}}>
@@ -247,7 +238,7 @@ export default function InstagramTask() {
                   Step {selectedTask.stepsDone} of {selectedTask.totalSteps}
                 </div>
               </div>
-              <div className="dash-bar mb-2.5 h-[7px]">
+              <div className="bar" style={{height:"7px", marginBottom:"10px"}}>
                 <div style={{
                   height:"100%",
                   borderRadius:"3px",
@@ -256,63 +247,68 @@ export default function InstagramTask() {
                   transition:"width .4s"
                 }}></div>
               </div>
-              <div className="dash-g2" style={{gap:"7px", display:"flex", justifyContent:"space-between"}}>
-                <div className="dash-mst">
-                  <div className="dash-mv" style={{color:"var(--gr)"}}>{selectedTask.stepsDone}</div>
-                  <div className="dash-ml flex-text-icon">Steps Done</div>
+              <div className="g2" style={{gap:"7px", display:"flex", justifyContent:"space-between"}}>
+                <div className="mst">
+                  <div className="mv" style={{color:"var(--gr)"}}>{selectedTask.stepsDone}</div>
+                  <div className="ml">Steps Done</div>
                 </div>
-                <div className="dash-mst">
-                  <div className="dash-mv" style={{color:"var(--am)"}}>{selectedTask.totalSteps - selectedTask.stepsDone}</div>
-                  <div className="dash-ml flex-text-icon">Remaining</div>
+                <div className="mst">
+                  <div className="mv" style={{color:"var(--am)"}}>{selectedTask.totalSteps - selectedTask.stepsDone}</div>
+                  <div className="ml">Remaining</div>
                 </div>
               </div>
             </div>
             
-            <div className="dash-card">
+            <div className="card">
               <div style={{fontSize:"12px", fontWeight:"600", color:"var(--tx)", marginBottom:"9px"}}>Task Info</div>
-              <div className="dash-fr flex-text-icon" style={{display:"flex", justifyContent:"space-between", marginBottom:"8px"}}>
-                <span className="dash-fk" style={{color:"var(--tx3)"}}>Platform</span>
-                <span className="dash-fv">Instagram</span>
+              <div className="fr" style={{display:"flex", justifyContent:"space-between", marginBottom:"8px"}}>
+                <span className="fk" style={{color:"var(--tx3)"}}>Platform</span>
+                <span className="fv">Instagram</span>
               </div>
-              <div className="dash-fr flex-text-icon" style={{display:"flex", justifyContent:"space-between", marginBottom:"8px"}}>
-                <span className="dash-fk" style={{color:"var(--tx3)"}}>Task Type</span>
-                <span className="dash-fv" style={{textTransform:"capitalize"}}>
+              <div className="fr" style={{display:"flex", justifyContent:"space-between", marginBottom:"8px"}}>
+                <span className="fk" style={{color:"var(--tx3)"}}>Task Type</span>
+                <span className="fv" style={{textTransform:"capitalize"}}>
                   {selectedTask.type === "follow" ? "Follow" : selectedTask.type === "like" ? "Like" : "Share Story"}
                 </span>
               </div>
-              <div className="dash-fr flex-text-icon" style={{display:"flex", justifyContent:"space-between", marginBottom:"8px"}}>
-                <span className="dash-fk" style={{color:"var(--tx3)"}}>Reward</span>
-                <span className="dash-fv" style={{color:"var(--glt)", fontWeight:"700"}}>+{selectedTask.points} pts</span>
+              <div className="fr" style={{display:"flex", justifyContent:"space-between", marginBottom:"8px"}}>
+                <span className="fk" style={{color:"var(--tx3)"}}>Reward</span>
+                <span className="fv" style={{color:"var(--glt)", fontWeight:"700"}}>+{selectedTask.points} pts</span>
               </div>
-              <div className="dash-fr flex-text-icon" style={{display:"flex", justifyContent:"space-between"}}>
-                <span className="dash-fk" style={{color:"var(--tx3)"}}>Status</span>
+              <div className="fr" style={{display:"flex", justifyContent:"space-between"}}>
+                <span className="fk" style={{color:"var(--tx3)"}}>Status</span>
                 <span className={`pill ${selectedTask.stepsDone === selectedTask.totalSteps ? "pd" : "pp"}`}>
                   {selectedTask.stepsDone === selectedTask.totalSteps ? "Ready to Claim" : "In Progress"}
                 </span>
               </div>
             </div>
             
-            <div className="dash-card">
+            <div className="card">
               <div style={{fontSize:"12px", fontWeight:"600", color:"var(--tx)", marginBottom:"7px"}}>How It Works</div>
               <div style={{fontSize:"12px", color:"var(--tx2)", lineHeight:"1.65"}}>
                 Complete each step in order on Instagram. Click <strong style={{color:"var(--tx)"}}>Claim Reward</strong> after completing all steps to verify and receive your points instantly.
               </div>
               <div style={{background:"linear-gradient(135deg, #f58529, #dd2a7b)", opacity:"0.1", borderRadius:"8px", padding:"10px", marginTop:"9px", display:"flex", alignItems:"center", gap:"8px"}}>
-                <Star style={{fontSize:"19px", color:"#dd2a7b"}} size={19} />
+                <i className="ti ti-star" style={{fontSize:"19px", color:"#dd2a7b"}} aria-hidden="true"></i>
                 <div>
                   <div style={{fontSize:"12px", fontWeight:"600", color:"#dd2a7b"}}>+{selectedTask.points} MDR Points</div>
-                  <div style={{fontSize:"10px"}} className="dash-td">Credited on completion</div>
+                  <div style={{fontSize:"10px", color:"var(--tx3)"}}>Credited on completion</div>
                 </div>
               </div>
             </div>
             
             {selectedTask.stepsDone === selectedTask.totalSteps && (
               <button 
-                className="w-full px-4 py-2 rounded-md font-semibold text-white bg-gradient-to-r from-orange-400 to-pink-500"
+                className="btn bg bfw" 
                 onClick={claimReward}
-                style={{border: 'none'}}
+                style={{
+                  width:"100%", 
+                  padding:"10px",
+                  background:"linear-gradient(135deg, #f58529, #dd2a7b)",
+                  border:"none"
+                }}
               >
-                <Gift className="inline mr-1" size={16} />
+                <i className="ti ti-gift"></i>
                 Claim Reward
               </button>
             )}
@@ -323,96 +319,101 @@ export default function InstagramTask() {
   };
 
   return (
-    <div className="dash-pg dash-is-active" id="pg-ig">
-      <div className="dash-pad">
-        <div className="dash-bc">
+    <div className="pg on" id="pg-ig">
+      <div className="pad">
+        <div className="bc">
           <span onClick={() => go('home')}>Dashboard</span>
           <span>›</span>
           <span onClick={() => go('tasks')}>Loyalty Tasks</span>
           <span>›</span>
-          <span className="dash-cur">Instagram</span>
+          <span className="cur">Instagram</span>
         </div>
         
         <div style={{display:"flex", alignItems:"center", gap:"10px", justifyContent:"space-between", flexWrap:"wrap"}}>
-          <div className="flex items-center gap-[10px]">
+          <div style={{display:"flex", alignItems:"center", gap:"10px"}}>
             <div style={{width:"42px", height:"42px", borderRadius:"10px", background:"linear-gradient(135deg,#f58529,#dd2a7b)", display:"flex", alignItems:"center", justifyContent:"center"}}>
-              <CiInstagram size={20} color="white" />
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                <rect x="2" y="2" width="20" height="20" rx="5" stroke="white" strokeWidth="2.2"></rect>
+                <circle cx="12" cy="12" r="4" stroke="white" strokeWidth="2"></circle>
+                <circle cx="17.5" cy="6.5" r="1.5" fill="white"></circle>
+              </svg>
             </div>
             <div>
-              <div className="dash-h1">Instagram Tasks</div>
-              <div className="dash-sub">Follow, like reels and share stories</div>
+              <div className="h1">Instagram Tasks</div>
+              <div className="sub">Follow, like reels and share stories</div>
             </div>
           </div>
-          <span className="dash-pill dash-pn">{completedCount} / {totalTasks} Completed</span>
+          <span className="pill pn">{completedCount} / {totalTasks} Completed</span>
         </div>
         
-        <div className="dash-bar h-1.5">
-          <div className="dash-bf" style={{width:`${completedPercentage}%`, background:"linear-gradient(90deg, #f58529, #dd2a7b)"}}></div>
+        <div className="bar" style={{height:"6px"}}>
+          <div className="bf" style={{width:`${completedPercentage}%`, background:"linear-gradient(90deg, #f58529, #dd2a7b)"}}></div>
         </div>
         
-        <div id="ig-list" style={{display:"flex", flexDirection:"column", gap:"8px"}}> 
+        <div id="ig-list" style={{display:"flex", flexDirection:"column", gap:"8px"}}>
+          {/* Task 1 - Follow @MudraFinance (Done) */}
           <div className={`tr ${tasks.ig1.status === "done" ? "dn2" : ""}`} id="srig1">
-            <div className="dash-tico bg-[#dd2a7b]">
-              <UserPlus className="text-[15px] text-white" size={15} />
+            <div className="tico" style={{background:"#dd2a7b"}}>
+              <i className="ti ti-user-plus" style={{fontSize:"15px", color:"#fff"}} aria-hidden="true"></i>
             </div>
-            <div className="dash-tb">
-              <div className="dash-tt">Follow @MUDRAFinance</div>
-              <div className="dash-td">Follow the official MUDRA Instagram</div>
-              <div className="dash-tpg">
-                <div className="dash-bar flex-1">
-                  <div className="dash-bf" id="sbig1" style={{width:`${tasks.ig1.progress}%`}}></div>
+            <div className="tb">
+              <div className="tt">Follow @MudraFinance</div>
+              <div className="td">Follow the official Mudra Instagram</div>
+              <div className="tpg">
+                <div className="bar" style={{flex:1}}>
+                  <div className="bf" id="sbig1" style={{width:`${tasks.ig1.progress}%`}}></div>
                 </div>
-                <span className="dash-tpct" id="spig1">{tasks.ig1.progress}%</span>
+                <span className="tpct" id="spig1">{tasks.ig1.progress}%</span>
               </div>
             </div>
-            <div className="dash-tr-r">
-              <div className="dash-pts">+{tasks.ig1.points} pts</div>
-              <span className="dash-pill dash-pd"><CheckCircle className="inline mr-0.5" size={12} />Done</span>
+            <div className="tr-r">
+              <div className="pts">+{tasks.ig1.points} pts</div>
+              <span className="pill pd"><i className="ti ti-check"></i>Done</span>
             </div>
           </div>
           
           {/* Task 2 - Like: Platform Launch Reel (Done) */}
           <div className={`tr ${tasks.ig2.status === "done" ? "dn2" : ""}`} id="srig2">
-            <div className="dash-tico bg-[#dd2a7b]">
-              <Heart className="text-[15px] text-white" size={15} />
+            <div className="tico" style={{background:"#dd2a7b"}}>
+              <i className="ti ti-heart" style={{fontSize:"15px", color:"#fff"}} aria-hidden="true"></i>
             </div>
-            <div className="dash-tb">
-              <div className="dash-tt">Like: Platform Launch Reel</div>
-              <div className="dash-td">Like our launch reel</div>
-              <div className="dash-tpg">
-                <div className="dash-bar flex-1">
-                  <div className="dash-bf" id="sbig2" style={{width:`${tasks.ig2.progress}%`}}></div>
+            <div className="tb">
+              <div className="tt">Like: Platform Launch Reel</div>
+              <div className="td">Like our launch reel</div>
+              <div className="tpg">
+                <div className="bar" style={{flex:1}}>
+                  <div className="bf" id="sbig2" style={{width:`${tasks.ig2.progress}%`}}></div>
                 </div>
-                <span className="dash-tpct" id="spig2">{tasks.ig2.progress}%</span>
+                <span className="tpct" id="spig2">{tasks.ig2.progress}%</span>
               </div>
             </div>
-            <div className="dash-tr-r">
-              <div className="dash-pts">+{tasks.ig2.points} pts</div>
-              <span className="dash-pill dash-pd"><CheckCircle className="inline mr-0.5" size={12} />Done</span>
+            <div className="tr-r">
+              <div className="pts">+{tasks.ig2.points} pts</div>
+              <span className="pill pd"><i className="ti ti-check"></i>Done</span>
             </div>
           </div>
           
-          {/* Task 3 - Like: Velt Impera Infographic (New) */}
+          {/* Task 3 - Like: MDR Token Infographic (New) */}
           <div className={`tr ${tasks.ig3.status === "done" ? "dn2" : ""}`} id="srig3">
-            <div className="dash-tico bg-[#dd2a7b]">
-              <Heart className="text-[15px] text-white" size={15} />
+            <div className="tico" style={{background:"#dd2a7b"}}>
+              <i className="ti ti-heart" style={{fontSize:"15px", color:"#fff"}} aria-hidden="true"></i>
             </div>
-            <div className="dash-tb">
-              <div className="dash-tt">Like: Velt Impera Infographic</div>
-              <div className="dash-td">Like our Velt Impera explainer post</div>
-              <div className="dash-tpg">
-                <div className="dash-bar flex-1">
-                  <div className="dash-bf" id="sbig3" style={{width:`${tasks.ig3.progress}%`}}></div>
+            <div className="tb">
+              <div className="tt">Like: MDR Token Infographic</div>
+              <div className="td">Like our MDR token explainer post</div>
+              <div className="tpg">
+                <div className="bar" style={{flex:1}}>
+                  <div className="bf" id="sbig3" style={{width:`${tasks.ig3.progress}%`}}></div>
                 </div>
-                <span className="dash-tpct" id="spig3">{tasks.ig3.progress}%</span>
+                <span className="tpct" id="spig3">{tasks.ig3.progress}%</span>
               </div>
             </div>
-            <div className="dash-tr-r">
-              <div className="dash-pts">+{tasks.ig3.points} pts</div>
+            <div className="tr-r">
+              <div className="pts">+{tasks.ig3.points} pts</div>
               {tasks.ig3.status === "new" && (
                 <>
-                  <span className="dash-pill dash-pn"><Sparkles className="inline mr-0.5" size={12} />New</span>
-                  <button className="btn dash-btn-fill dash-bxs mt-[3px] text-[11px]" onClick={() => openSoc('ig3','ig')}>Start Task</button>
+                  <span className="pill pn"><i className="ti ti-sparkles"></i>New</span>
+                  <button className="btn bg bxs" style={{marginTop:"3px", fontSize:"11px"}} onClick={() => openSoc('ig3','ig')}>Start Task</button>
                 </>
               )}
             </div>
@@ -420,25 +421,25 @@ export default function InstagramTask() {
           
           {/* Task 4 - Share Story: Referral Code (In Progress) */}
           <div className={`tr ${tasks.ig4.status === "progress" ? "act" : ""} ${tasks.ig4.status === "done" ? "dn2" : ""}`} id="srig4">
-            <div className="dash-tico bg-[#dd2a7b]">
-              <Share2 className="text-[15px] text-white" size={15} />
+            <div className="tico" style={{background:"#dd2a7b"}}>
+              <i className="ti ti-share-2" style={{fontSize:"15px", color:"#fff"}} aria-hidden="true"></i>
             </div>
-            <div className="dash-tb">
-              <div className="dash-tt">Share Story: Referral Code</div>
-              <div className="dash-td">Share our referral template to your story</div>
-              <div className="dash-tpg">
-                <div className="dash-bar flex-1">
-                  <div className="dash-bf" id="sbig4" style={{width:`${tasks.ig4.progress}%`}}></div>
+            <div className="tb">
+              <div className="tt">Share Story: Referral Code</div>
+              <div className="td">Share our referral template to your story</div>
+              <div className="tpg">
+                <div className="bar" style={{flex:1}}>
+                  <div className="bf" id="sbig4" style={{width:`${tasks.ig4.progress}%`}}></div>
                 </div>
-                <span className="dash-tpct" id="spig4">{tasks.ig4.progress}%</span>
+                <span className="tpct" id="spig4">{tasks.ig4.progress}%</span>
               </div>
             </div>
-            <div className="dash-tr-r">
-              <div className="dash-pts">+{tasks.ig4.points} pts</div>
+            <div className="tr-r">
+              <div className="pts">+{tasks.ig4.points} pts</div>
               {tasks.ig4.status === "progress" && (
                 <>
-                  <span className="dash-pill dash-pp"><Clock className="inline mr-0.5" size={12} />Progress</span>
-                  <button className="btn dash-btn-outline dash-bxs copy-btn mt-[3px] text-[11px]" onClick={() => openSoc('ig4','ig')}>Continue</button>
+                  <span className="pill pp"><i className="ti ti-clock"></i>Progress</span>
+                  <button className="btn bo bxs" style={{marginTop:"3px", fontSize:"11px"}} onClick={() => openSoc('ig4','ig')}>Continue</button>
                 </>
               )}
             </div>
@@ -446,25 +447,25 @@ export default function InstagramTask() {
           
           {/* Task 5 - Like: Rewards Feature Reel (New) */}
           <div className={`tr ${tasks.ig5.status === "done" ? "dn2" : ""}`} id="srig5">
-            <div className="dash-tico bg-[#dd2a7b]">
-              <Heart className="text-[15px] text-white" size={15} />
+            <div className="tico" style={{background:"#dd2a7b"}}>
+              <i className="ti ti-heart" style={{fontSize:"15px", color:"#fff"}} aria-hidden="true"></i>
             </div>
-            <div className="dash-tb">
-              <div className="dash-tt">Like: Rewards Feature Reel</div>
-              <div className="dash-td">Like the rewards wallet highlight reel</div>
-              <div className="dash-tpg">
-                <div className="dash-bar flex-1">
-                  <div className="dash-bf" id="sbig5" style={{width:`${tasks.ig5.progress}%`}}></div>
+            <div className="tb">
+              <div className="tt">Like: Rewards Feature Reel</div>
+              <div className="td">Like the rewards wallet highlight reel</div>
+              <div className="tpg">
+                <div className="bar" style={{flex:1}}>
+                  <div className="bf" id="sbig5" style={{width:`${tasks.ig5.progress}%`}}></div>
                 </div>
-                <span className="dash-tpct" id="spig5">{tasks.ig5.progress}%</span>
+                <span className="tpct" id="spig5">{tasks.ig5.progress}%</span>
               </div>
             </div>
-            <div className="dash-tr-r">
-              <div className="dash-pts">+{tasks.ig5.points} pts</div>
+            <div className="tr-r">
+              <div className="pts">+{tasks.ig5.points} pts</div>
               {tasks.ig5.status === "new" && (
                 <>
-                  <span className="dash-pill dash-pn"><Sparkles className="inline mr-0.5" size={12} />New</span>
-                  <button className="btn dash-btn-fill dash-bxs mt-[3px] text-[11px]" onClick={() => openSoc('ig5','ig')}>Start Task</button>
+                  <span className="pill pn"><i className="ti ti-sparkles"></i>New</span>
+                  <button className="btn bg bxs" style={{marginTop:"3px", fontSize:"11px"}} onClick={() => openSoc('ig5','ig')}>Start Task</button>
                 </>
               )}
             </div>

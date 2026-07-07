@@ -1,5 +1,6 @@
 "use client";
 
+import "../mudra-dashboard.css";
 import { useEffect, useState, useRef } from "react";
 
 export default function YouTubeTask() {
@@ -16,7 +17,7 @@ export default function YouTubeTask() {
   // Video data with WORKING video URLs (public sample videos that definitely work)
   const videos = {
     v1: { 
-      title: "MUDRA Platform Overview", 
+      title: "Mudra Platform Overview", 
       duration: "0:30", 
       durationSec: 30, 
       points: 12, 
@@ -36,7 +37,7 @@ export default function YouTubeTask() {
       videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4"
     },
     v3: { 
-      title: "Velt Impera Explained", 
+      title: "MDR Token Explained", 
       duration: "0:30", 
       durationSec: 30, 
       points: 12, 
@@ -56,7 +57,7 @@ export default function YouTubeTask() {
       videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4"
     },
     v5: { 
-      title: "Subscribe to MUDRA Channel", 
+      title: "Subscribe to Mudra Channel", 
       duration: "N/A", 
       durationSec: 0, 
       points: 20, 
@@ -65,7 +66,7 @@ export default function YouTubeTask() {
       type: "subscribe" 
     },
     v6: { 
-      title: "Like: MUDRA Launch Video", 
+      title: "Like: Mudra Launch Video", 
       duration: "N/A", 
       durationSec: 0, 
       points: 5, 
@@ -171,20 +172,42 @@ export default function YouTubeTask() {
     }
   };
 
-  const handleVideoEnded = () => {
-    setIsPlaying(false);
-    if (currentVideo && videos[currentVideo.id].progress < 100) {
-      videos[currentVideo.id].progress = 100;
-      videos[currentVideo.id].status = "done";
-      setCompletedCount((prev) => prev + 1);
-      setWatchedPercent(100);
-    }
-  };
-
   useEffect(() => {
     if (videoRef.current && currentVideo) {
+      const video = videoRef.current;
+      
+      const handleTimeUpdate = () => {
+        updateProgress();
+      };
+      
+      const handleEnded = () => {
+        setIsPlaying(false);
+        if (videos[currentVideo.id].progress < 100) {
+          videos[currentVideo.id].progress = 100;
+          videos[currentVideo.id].status = "done";
+          setCompletedCount(prev => prev + 1);
+          setWatchedPercent(100);
+        }
+      };
+      
+      const handlePlay = () => setIsPlaying(true);
+      const handlePause = () => setIsPlaying(false);
+      
+      video.addEventListener('timeupdate', handleTimeUpdate);
+      video.addEventListener('ended', handleEnded);
+      video.addEventListener('play', handlePlay);
+      video.addEventListener('pause', handlePause);
+      
+      // Set initial time
       const startTime = (currentVideo.progress / 100) * currentVideo.durationSec;
-      videoRef.current.currentTime = startTime;
+      video.currentTime = startTime;
+      
+      return () => {
+        video.removeEventListener('timeupdate', handleTimeUpdate);
+        video.removeEventListener('ended', handleEnded);
+        video.removeEventListener('play', handlePlay);
+        video.removeEventListener('pause', handlePause);
+      };
     }
   }, [currentVideo]);
 
@@ -210,163 +233,163 @@ export default function YouTubeTask() {
   const remainingTime = currentVideo ? Math.max(0, currentVideo.durationSec - currentTime) : 0;
 
   return (
-    <div className="dash-pg dash-is-active" id="pg-yt">
-      <div className="dash-pad">
-        <div className="dash-bc">
+    <div className="pg on" id="pg-yt">
+      <div className="pad">
+        <div className="bc">
           <span onClick={() => go('home')}>Dashboard</span>
           <span>›</span>
           <span onClick={() => go('tasks')}>Loyalty Tasks</span>
           <span>›</span>
-          <span className="dash-cur">YouTube</span>
+          <span className="cur">YouTube</span>
         </div>
         
         <div style={{display:"flex", alignItems:"center", gap:"10px", justifyContent:"space-between", flexWrap:"wrap"}}>
-          <div className="flex items-center gap-[10px]">
+          <div style={{display:"flex", alignItems:"center", gap:"10px"}}>
             <div style={{width:"42px", height:"42px", borderRadius:"10px", background:"#FF0000", display:"flex", alignItems:"center", justifyContent:"center", flexShrink:0}}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
                 <path d="M23 7s-.3-2-1.2-2.8c-1.1-1.2-2.4-1.2-3-1.3C16.2 2.8 12 2.8 12 2.8s-4.2 0-6.8.1c-.6.1-1.9.1-3 1.3C1.3 5 1 7 1 7S.7 9.1.7 11.2v2c0 2 .3 4.2.3 4.2s.3 2 1.2 2.8c1.1 1.2 2.6 1.1 3.3 1.2C7.3 21.5 12 21.5 12 21.5s4.2 0 6.8-.2c.6-.1 1.9-.1 3-1.2.9-.8 1.2-2.8 1.2-2.8s.3-2.1.3-4.2v-2C23.3 9.1 23 7 23 7zM9.7 15.5V8.4l6.5 3.6-6.5 3.5z"></path>
               </svg>
             </div>
             <div>
-              <div className="dash-h1">YouTube Tasks</div>
-              <div className="dash-sub">Watch, like and subscribe to earn MDR points</div>
+              <div className="h1">YouTube Tasks</div>
+              <div className="sub">Watch, like and subscribe to earn MDR points</div>
             </div>
           </div>
-          <span className="dash-pill dash-pd">{completedCount} / {totalTasks} Completed</span>
+          <span className="pill pd">{completedCount} / {totalTasks} Completed</span>
         </div>
         
-        <div className="dash-bar h-1.5">
-          <div className="dash-bf" style={{width:`${completedPercentage}%`}}></div>
+        <div className="bar" style={{height:"6px"}}>
+          <div className="bf" style={{width:`${completedPercentage}%`}}></div>
         </div>
         
         {/* YouTube Tasks List */}
         <div id="yt-list" style={{display:"flex", flexDirection:"column", gap:"8px"}}>
           {/* Task 1 - Done */}
-          <div className="dash-tr dash-dn2" id="yrv1">
-            <div className="dash-tico bg-[#FF0000]">
-              <i className="ti ti-player-play text-[15px] text-white" aria-hidden="true"></i>
+          <div className="tr dn2" id="yrv1">
+            <div className="tico" style={{background:"#FF0000"}}>
+              <i className="ti ti-player-play" style={{fontSize:"15px", color:"#fff"}} aria-hidden="true"></i>
             </div>
-            <div className="dash-tb">
-              <div className="dash-tt">MUDRA Platform Overview</div>
-              <div className="dash-td">Complete dashboard walkthrough · 0:30</div>
-              <div className="dash-tpg">
-                <div className="dash-bar flex-1">
-                  <div className="dash-bf" id="ybv1" style={{width:"100%"}}></div>
+            <div className="tb">
+              <div className="tt">Mudra Platform Overview</div>
+              <div className="td">Complete dashboard walkthrough · 0:30</div>
+              <div className="tpg">
+                <div className="bar" style={{flex:1}}>
+                  <div className="bf" id="ybv1" style={{width:"100%"}}></div>
                 </div>
-                <span className="dash-tpct" id="ypv1">100%</span>
+                <span className="tpct" id="ypv1">100%</span>
               </div>
             </div>
-            <div className="dash-tr-r">
-              <div className="dash-pts">+12 pts</div>
-              <span className="dash-pill dash-pd"><i className="ti ti-check"></i>Done</span>
+            <div className="tr-r">
+              <div className="pts">+12 pts</div>
+              <span className="pill pd"><i className="ti ti-check"></i>Done</span>
             </div>
           </div>
           
           {/* Task 2 - In Progress */}
-          <div className="dash-tr dash-act" id="yrv2">
-            <div className="dash-tico bg-[#FF0000]">
-              <i className="ti ti-player-play text-[15px] text-white" aria-hidden="true"></i>
+          <div className="tr act" id="yrv2">
+            <div className="tico" style={{background:"#FF0000"}}>
+              <i className="ti ti-player-play" style={{fontSize:"15px", color:"#fff"}} aria-hidden="true"></i>
             </div>
-            <div className="dash-tb">
-              <div className="dash-tt">How to Convert Crypto to Fiat</div>
-              <div className="dash-td">Step-by-step exchange guide · 0:30</div>
-              <div className="dash-tpg">
-                <div className="dash-bar flex-1">
-                  <div className="dash-bf" id="ybv2" style={{width:"60%"}}></div>
+            <div className="tb">
+              <div className="tt">How to Convert Crypto to Fiat</div>
+              <div className="td">Step-by-step exchange guide · 0:30</div>
+              <div className="tpg">
+                <div className="bar" style={{flex:1}}>
+                  <div className="bf" id="ybv2" style={{width:"60%"}}></div>
                 </div>
-                <span className="dash-tpct" id="ypv2">60%</span>
+                <span className="tpct" id="ypv2">60%</span>
               </div>
             </div>
-            <div className="dash-tr-r">
-              <div className="dash-pts">+15 pts</div>
-              <span className="dash-pill dash-pp"><i className="ti ti-clock"></i>Progress</span>
-              <button className="btn dash-btn-outline dash-bxs copy-btn mt-[3px] text-[11px]" onClick={() => openVid('v2')}>Continue</button>
+            <div className="tr-r">
+              <div className="pts">+15 pts</div>
+              <span className="pill pp"><i className="ti ti-clock"></i>Progress</span>
+              <button className="btn bo bxs" style={{marginTop:"3px", fontSize:"11px"}} onClick={() => openVid('v2')}>Continue</button>
             </div>
           </div>
           
           {/* Task 3 - New */}
-          <div className="dash-tr" id="yrv3">
-            <div className="dash-tico bg-[#FF0000]">
-              <i className="ti ti-player-play text-[15px] text-white" aria-hidden="true"></i>
+          <div className="tr" id="yrv3">
+            <div className="tico" style={{background:"#FF0000"}}>
+              <i className="ti ti-player-play" style={{fontSize:"15px", color:"#fff"}} aria-hidden="true"></i>
             </div>
-            <div className="dash-tb">
-              <div className="dash-tt">Velt Impera Explained</div>
-              <div className="dash-td">Velt Imperaomics and utility · 0:30</div>
-              <div className="dash-tpg">
-                <div className="dash-bar flex-1">
-                  <div className="dash-bf" id="ybv3" style={{width:"0%"}}></div>
+            <div className="tb">
+              <div className="tt">MDR Token Explained</div>
+              <div className="td">MDR tokenomics and utility · 0:30</div>
+              <div className="tpg">
+                <div className="bar" style={{flex:1}}>
+                  <div className="bf" id="ybv3" style={{width:"0%"}}></div>
                 </div>
-                <span className="dash-tpct" id="ypv3">0%</span>
+                <span className="tpct" id="ypv3">0%</span>
               </div>
             </div>
-            <div className="dash-tr-r">
-              <div className="dash-pts">+12 pts</div>
-              <span className="dash-pill dash-pn"><i className="ti ti-sparkles"></i>New</span>
-              <button className="btn dash-btn-fill dash-bxs mt-[3px] text-[11px]" onClick={() => openVid('v3')}>Watch</button>
+            <div className="tr-r">
+              <div className="pts">+12 pts</div>
+              <span className="pill pn"><i className="ti ti-sparkles"></i>New</span>
+              <button className="btn bg bxs" style={{marginTop:"3px", fontSize:"11px"}} onClick={() => openVid('v3')}>Watch</button>
             </div>
           </div>
           
           {/* Task 4 - New */}
-          <div className="dash-tr" id="yrv4">
-            <div className="dash-tico bg-[#FF0000]">
-              <i className="ti ti-player-play text-[15px] text-white" aria-hidden="true"></i>
+          <div className="tr" id="yrv4">
+            <div className="tico" style={{background:"#FF0000"}}>
+              <i className="ti ti-player-play" style={{fontSize:"15px", color:"#fff"}} aria-hidden="true"></i>
             </div>
-            <div className="dash-tb">
-              <div className="dash-tt">Loyalty Rewards Deep Dive</div>
-              <div className="dash-td">Earn and redeem points guide · 0:30</div>
-              <div className="dash-tpg">
-                <div className="dash-bar flex-1">
-                  <div className="dash-bf" id="ybv4" style={{width:"0%"}}></div>
+            <div className="tb">
+              <div className="tt">Loyalty Rewards Deep Dive</div>
+              <div className="td">Earn and redeem points guide · 0:30</div>
+              <div className="tpg">
+                <div className="bar" style={{flex:1}}>
+                  <div className="bf" id="ybv4" style={{width:"0%"}}></div>
                 </div>
-                <span className="dash-tpct" id="ypv4">0%</span>
+                <span className="tpct" id="ypv4">0%</span>
               </div>
             </div>
-            <div className="dash-tr-r">
-              <div className="dash-pts">+15 pts</div>
-              <span className="dash-pill dash-pn"><i className="ti ti-sparkles"></i>New</span>
-              <button className="btn dash-btn-fill dash-bxs mt-[3px] text-[11px]" onClick={() => openVid('v4')}>Watch</button>
+            <div className="tr-r">
+              <div className="pts">+15 pts</div>
+              <span className="pill pn"><i className="ti ti-sparkles"></i>New</span>
+              <button className="btn bg bxs" style={{marginTop:"3px", fontSize:"11px"}} onClick={() => openVid('v4')}>Watch</button>
             </div>
           </div>
           
           {/* Task 5 - Subscribe Done */}
-          <div className="dash-tr dash-dn2" id="yrv5">
-            <div className="dash-tico bg-[#FF0000]">
-              <i className="ti ti-bell text-[15px] text-white" aria-hidden="true"></i>
+          <div className="tr dn2" id="yrv5">
+            <div className="tico" style={{background:"#FF0000"}}>
+              <i className="ti ti-bell" style={{fontSize:"15px", color:"#fff"}} aria-hidden="true"></i>
             </div>
-            <div className="dash-tb">
-              <div className="dash-tt">Subscribe to MUDRA Channel</div>
-              <div className="dash-td">Stay updated with MUDRA content</div>
-              <div className="dash-tpg">
-                <div className="dash-bar flex-1">
-                  <div className="dash-bf" id="ybv5" style={{width:"100%"}}></div>
+            <div className="tb">
+              <div className="tt">Subscribe to Mudra Channel</div>
+              <div className="td">Stay updated with Mudra content</div>
+              <div className="tpg">
+                <div className="bar" style={{flex:1}}>
+                  <div className="bf" id="ybv5" style={{width:"100%"}}></div>
                 </div>
-                <span className="dash-tpct" id="ypv5">100%</span>
+                <span className="tpct" id="ypv5">100%</span>
               </div>
             </div>
-            <div className="dash-tr-r">
-              <div className="dash-pts">+20 pts</div>
-              <span className="dash-pill dash-pd"><i className="ti ti-check"></i>Done</span>
+            <div className="tr-r">
+              <div className="pts">+20 pts</div>
+              <span className="pill pd"><i className="ti ti-check"></i>Done</span>
             </div>
           </div>
           
           {/* Task 6 - Like Done */}
-          <div className="dash-tr dash-dn2" id="yrv6">
-            <div className="dash-tico bg-[#FF0000]">
-              <i className="ti ti-heart text-[15px] text-white" aria-hidden="true"></i>
+          <div className="tr dn2" id="yrv6">
+            <div className="tico" style={{background:"#FF0000"}}>
+              <i className="ti ti-heart" style={{fontSize:"15px", color:"#fff"}} aria-hidden="true"></i>
             </div>
-            <div className="dash-tb">
-              <div className="dash-tt">Like: MUDRA Launch Video</div>
-              <div className="dash-td">Like our official launch video</div>
-              <div className="dash-tpg">
-                <div className="dash-bar flex-1">
-                  <div className="dash-bf" id="ybv6" style={{width:"100%"}}></div>
+            <div className="tb">
+              <div className="tt">Like: Mudra Launch Video</div>
+              <div className="td">Like our official launch video</div>
+              <div className="tpg">
+                <div className="bar" style={{flex:1}}>
+                  <div className="bf" id="ybv6" style={{width:"100%"}}></div>
                 </div>
-                <span className="dash-tpct" id="ypv6">100%</span>
+                <span className="tpct" id="ypv6">100%</span>
               </div>
             </div>
-            <div className="dash-tr-r">
-              <div className="dash-pts">+5 pts</div>
-              <span className="dash-pill dash-pd"><i className="ti ti-check"></i>Done</span>
+            <div className="tr-r">
+              <div className="pts">+5 pts</div>
+              <span className="pill pd"><i className="ti ti-check"></i>Done</span>
             </div>
           </div>
         </div>
@@ -374,58 +397,59 @@ export default function YouTubeTask() {
         {/* Video Player - Responsive for mobile */}
         {showPlayer && currentVideo && (
           <div id="yt-player" style={{display:"block"}}>
-            <div className="dash-card">
-              <div className="flex items-center gap-[9px] mb-[12px] flex-wrap">
-                <button className="btn dash-btn-muted dashboard-btn dash-bsm" onClick={closeVid}>
+            <div className="card">
+              <div style={{display:"flex", alignItems:"center", gap:"9px", marginBottom:"12px", flexWrap:"wrap"}}>
+                <button className="btn bn bsm" onClick={closeVid}>
                   <i className="ti ti-arrow-left"></i>Back to List
                 </button>
                 <div style={{fontSize:"13px", fontWeight:"600", color:"var(--tx)"}}>{currentVideo.title}</div>
               </div>
               
-              <div className="grid grid-cols-1 gap-3.5 max-md:grid-cols-1 min-[769px]:grid-cols-[1.4fr_1fr]">
+              <div style={{
+                display:"grid", 
+                gridTemplateColumns: "1.4fr 1fr", 
+                gap:"14px"
+              }}>
                 <div>
-                  <div className="dash-vid-wrap">
+                  <div className="vid-wrap">
                     <video
                       ref={videoRef}
-                      className="dash-vid-screen w-full rounded-[10px] bg-black"
+                      className="vid-screen"
+                      style={{width:"100%", borderRadius:"10px", background:"#000"}}
                       onClick={togglePlay}
-                      onTimeUpdate={updateProgress}
-                      onEnded={handleVideoEnded}
-                      onPlay={() => setIsPlaying(true)}
-                      onPause={() => setIsPlaying(false)}
                       src={currentVideo.videoUrl}
                     />
-                    <div className="dash-vc">
-                      <button className="dash-vc-btn" onClick={togglePlay} aria-label="Play/Pause">
+                    <div className="vc">
+                      <button className="vc-btn" onClick={togglePlay} aria-label="Play/Pause">
                         <i className={`ti ti-player-${isPlaying ? "pause" : "play"}`} id="pico"></i>
                       </button>
-                      <span className="dash-vct" id="et">{formatTime(currentTime)}</span>
-                      <div className="dash-vc-bar" onClick={(e) => seekV(e, e.currentTarget)}>
-                        <div className="dash-vc-prog" id="vpr" style={{width:`${(currentTime / currentVideo.durationSec) * 100}%`}}></div>
+                      <span className="vct" id="et">{formatTime(currentTime)}</span>
+                      <div className="vc-bar" onClick={(e) => seekV(e, e.currentTarget)}>
+                        <div className="vc-prog" id="vpr" style={{width:`${(currentTime / currentVideo.durationSec) * 100}%`}}></div>
                       </div>
-                      <span className="dash-vct">{currentVideo.duration}</span>
+                      <span className="vct">{currentVideo.duration}</span>
                     </div>
                   </div>
                   
                   <div style={{fontSize:"12.5px", fontWeight:"500", color:"var(--tx)", marginBottom:"2px"}}>{currentVideo.title}</div>
-                  <div style={{fontSize:"11px", color:"var(--tx3)", marginBottom:"10px"}}>MUDRA Official · YouTube · {currentVideo.duration}</div>
+                  <div style={{fontSize:"11px", color:"var(--tx3)", marginBottom:"10px"}}>Mudra Official · YouTube · {currentVideo.duration}</div>
                   
                   <div style={{display:"flex", gap:"7px", flexWrap:"wrap"}}>
-                    <button className="btn dash-btn-fill dash-bsm" onClick={togglePlay} id="ppb">
+                    <button className="btn bg bsm" onClick={togglePlay} id="ppb">
                       <i className={`ti ti-player-${isPlaying ? "pause" : "play"}`}></i>
                       {isPlaying ? "Pause" : "Play"}
                     </button>
-                    <button className="btn dash-btn-muted dashboard-btn dash-bsm" onClick={skipBack}>
+                    <button className="btn bn bsm" onClick={skipBack}>
                       <i className="ti ti-player-track-prev"></i>-10s
                     </button>
-                    <button className="btn dash-btn-muted dashboard-btn dash-bsm" onClick={skipFwd}>
+                    <button className="btn bn bsm" onClick={skipFwd}>
                       <i className="ti ti-player-track-next"></i>+10s
                     </button>
                   </div>
                 </div>
                 
                 <div style={{display:"flex", flexDirection:"column", gap:"10px"}}>
-                  <div className="dash-card">
+                  <div className="card">
                     <div style={{fontSize:"12px", fontWeight:"600", color:"var(--tx)", marginBottom:"9px"}}>Watch Progress</div>
                     <div style={{display:"flex", justifyContent:"space-between", alignItems:"baseline", marginBottom:"7px", flexWrap:"wrap", gap:"5px"}}>
                       <div style={{fontSize:"24px", fontWeight:"800", color:"var(--glt)"}} id="wpc">{Math.floor(watchedPercent)}%</div>
@@ -435,24 +459,24 @@ export default function YouTubeTask() {
                         </span>
                       </div>
                     </div>
-                    <div className="dash-bar mb-2.5 h-[7px]">
+                    <div className="bar" style={{height:"7px", marginBottom:"10px"}}>
                       <div id="wpb" style={{height:"100%", borderRadius:"3px", width:`${watchedPercent}%`, background:"linear-gradient(90deg,var(--gold),var(--glt))", transition:"width .5s linear"}}></div>
                     </div>
-                    <div className="dash-g2" style={{gap:"7px", display:"flex", justifyContent:"space-between"}}>
-                      <div className="dash-mst">
-                        <div className="dash-mv" id="wt" style={{fontFamily:"monospace"}}>{formatTime(currentTime)}</div>
-                        <div className="dash-ml flex-text-icon">Watched</div>
+                    <div className="g2" style={{gap:"7px", display:"flex", justifyContent:"space-between"}}>
+                      <div className="mst">
+                        <div className="mv" id="wt" style={{fontFamily:"monospace"}}>{formatTime(currentTime)}</div>
+                        <div className="ml">Watched</div>
                       </div>
-                      <div className="dash-mst">
-                        <div className="dash-mv" id="wr" style={{fontFamily:"monospace", color:"var(--am)"}}>{formatTime(remainingTime)}</div>
-                        <div className="dash-ml flex-text-icon">Remaining</div>
+                      <div className="mst">
+                        <div className="mv" id="wr" style={{fontFamily:"monospace", color:"var(--am)"}}>{formatTime(remainingTime)}</div>
+                        <div className="ml">Remaining</div>
                       </div>
                     </div>
                   </div>
                   
-                  <div className="dash-card">
+                  <div className="card">
                     <div style={{fontSize:"12px", fontWeight:"600", color:"var(--tx)", marginBottom:"9px"}}>Reward</div>
-                    <div className="flex items-center gap-[9px] mb-[9px] flex-wrap">
+                    <div style={{display:"flex", alignItems:"center", gap:"9px", marginBottom:"9px", flexWrap:"wrap"}}>
                       <div style={{width:"34px", height:"34px", borderRadius:"8px", background:"var(--gdim)", border:"1px solid var(--gbdr)", display:"flex", alignItems:"center", justifyContent:"center", color:"var(--glt)", fontSize:"18px"}}>
                         <i className="ti ti-star" aria-hidden="true"></i>
                       </div>
@@ -466,7 +490,7 @@ export default function YouTubeTask() {
                     </div>
                     <div id="ca">
                       <button 
-                        className={`btn btn-fill bfw ${watchedPercent >= 80 ? "" : "disabled"}`} 
+                        className={`btn bg bfw ${watchedPercent >= 80 ? "" : "disabled"}`} 
                         id="cbd" 
                         disabled={watchedPercent < 80}
                         style={{opacity: watchedPercent >= 80 ? 1 : 0.38, cursor: watchedPercent >= 80 ? "pointer" : "not-allowed", width:"100%"}}
@@ -479,7 +503,7 @@ export default function YouTubeTask() {
                   </div>
                   
                   {/* Up Next Section - Click any video to switch! */}
-                  <div className="dash-card">
+                  <div className="card">
                     <div style={{fontSize:"12px", fontWeight:"600", color:"var(--tx)", marginBottom:"9px"}}>Up Next</div>
                     {Object.keys(videos).filter(id => id !== currentVideo.id && videos[id].type === "video").map(id => (
                       <div 
@@ -520,6 +544,13 @@ export default function YouTubeTask() {
           </div>
         )}
       </div>
+      <style jsx>{`
+        @media (max-width: 768px) {
+          #yt-player .card > div:last-child {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
     </div>
   );
 }
